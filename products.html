@@ -30,79 +30,87 @@
 
 <body>
 
-  <!-- ================= NAVBAR ================= -->
+<!-- ================= NAVBAR ================= -->
 
-  <nav class="navbar">
+<nav class="navbar">
 
-    <!-- LOGO -->
+  <!-- FILTER BUTTON -->
+  <button class="open-filter-btn" onclick="openFilterPanel()">
+    ☰ Filters
+  </button>
 
-    <a href="index.html" class="logo">
+  <!-- LOGO -->
+  <a href="index.html" class="logo">
 
-      <div class="logo-box">
-        F
-      </div>
+    <div class="logo-box">F</div>
+    <h2>Firstline</h2>
 
-      <h2>Firstline</h2>
+  </a>
 
-    </a>
+  <!-- SEARCH -->
+  <div class="search-box">
+    <i class="fa-solid fa-magnifying-glass"></i>
 
-    <!-- SEARCH -->
+    <input
+      type="text"
+      placeholder="Search products..."
+      id="searchInput"
+    />
+  </div>
 
-    <div class="search-box">
+</nav>
 
-      <i class="fa-solid fa-magnifying-glass"></i>
+<!-- ================= FILTER PANEL ================= -->
 
-      <input
-        type="text"
-        placeholder="Search products..."
-        id="searchInput"
-      />
+<div id="filterOverlay" class="filter-overlay" onclick="closeFilterPanel()"></div>
 
-    </div>
+<div id="filterPanel" class="filter-panel">
 
-  </nav>
+  <!-- HEADER -->
+  <div class="filter-header">
+    <h3>Filters</h3>
 
-  <!-- ================= PRODUCTS PAGE ================= -->
+    <!-- CLOSE BUTTON -->
+    <button class="close-btn" onclick="closeFilterPanel()">✕</button>
+  </div>
 
-  <section class="products-page">
+  <!-- CATEGORY -->
+  <div class="filter-section">
+    <h4>Category</h4>
 
-    <!-- TITLE -->
+    <label><input type="checkbox" onchange="setCategory('All')"> All</label>
+    <label><input type="checkbox" onchange="setCategory('Fashion')"> Fashion</label>
+    <label><input type="checkbox" onchange="setCategory('Electronics')"> Electronics</label>
+    <label><input type="checkbox" onchange="setCategory('Accessories')"> Accessories</label>
+    <label><input type="checkbox" onchange="setCategory('Gaming')"> Gaming</label>
+    <label><input type="checkbox" onchange="setCategory('Beauty')"> Beauty</label>
+    <label><input type="checkbox" onchange="setCategory('Shoes')"> Shoes</label>
 
-    <div class="section-title">
+  </div>
 
-      <span>All Products</span>
+  <!-- PLATFORM -->
+  <div class="filter-section">
+    <h4>Platform</h4>
 
-      <h2>
-        Explore Products
-      </h2>
+    <label><input type="checkbox" onchange="setPlatform('All')"> All</label>
+    <label><input type="checkbox" onchange="setPlatform('amazon')"> Amazon</label>
+    <label><input type="checkbox" onchange="setPlatform('flipkart')"> Flipkart</label>
+    <label><input type="checkbox" onchange="setPlatform('myntra')"> Myntra</label>
+    <label><input type="checkbox" onchange="setPlatform('meesho')"> Meesho</label>
 
-    </div>
+  </div>
 
-    <!-- ================= FILTERS ================= -->
+  <!-- PRICE RANGE (CUSTOM USER INPUT) -->
+  <div class="filter-section">
+    <h4>Price Range</h4>
 
-    <div class="filter-buttons">
+    <input type="number" id="minPrice" placeholder="Min Price">
+    <input type="number" id="maxPrice" placeholder="Max Price">
 
-      <button class="filter-btn active" data-category="All">
-        All
-      </button>
+    <button onclick="applyCustomPrice()">Apply</button>
+  </div>
 
-      <button class="filter-btn" data-category="Fashion">
-        Fashion
-      </button>
-
-      <button class="filter-btn" data-category="Electronics">
-        Electronics
-      </button>
-
-      <button class="filter-btn" data-category="Accessories">
-        Accessories
-      </button>
-
-      <button class="filter-btn" data-category="Gaming">
-        Gaming
-      </button>
-
-    </div>
+</div>
 
     <!-- PRODUCTS GRID -->
 
@@ -126,57 +134,127 @@ const firebaseConfig = {
   appId: "1:240292512608:web:1027ece3891e454def9405"
 };
 
-// INIT FIREBASE
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 const productsGrid = document.getElementById("productsGrid");
 
+// ================= STATE =================
+let allProducts = [];
+let selectedCategory = "All";
+let selectedPlatform = "All";
+let minPrice = 0;
+let maxPrice = Infinity;
+let searchText = "";
+
+// ================= FILTER PANEL OPEN/CLOSE =================
+function openFilterPanel() {
+  document.getElementById("filterPanel").classList.add("active");
+}
+
+function closeFilterPanel() {
+  document.getElementById("filterPanel").classList.remove("active");
+}
+
+// ================= LOAD =================
 function loadProducts() {
 
-    db.collection("products")
-      .orderBy("createdAt", "desc")
-      .onSnapshot(snapshot => {
+  db.collection("products")
+    .orderBy("createdAt", "desc")
+    .onSnapshot(snapshot => {
 
-        productsGrid.innerHTML = "";
+      allProducts = [];
 
-        snapshot.forEach(doc => {
+      snapshot.forEach(doc => {
+        allProducts.push(doc.data());
+      });
 
-            let product = doc.data();
-
-            productsGrid.innerHTML += `
-                <div class="product-card">
-
-                    <div class="product-image">
-                        <img src="${product.image}">
-                        <div class="platform-tag ${product.platform}">
-                            ${product.platform}
-                        </div>
-                    </div>
-
-                    <div class="product-info">
-                        <h3>${product.title}</h3>
-                        <p>${product.desc}</p>
-
-                        <div class="product-bottom">
-                            <h4>${product.price}</h4>
-
-                            <a href="${product.link}" target="_blank">
-                                Buy Now
-                            </a>
-                        </div>
-                    </div>
-
-                </div>
-            `;
-        });
-
+      renderProducts();
     });
 }
 
+// ================= RENDER =================
+function renderProducts() {
+
+  productsGrid.innerHTML = "";
+
+  const filtered = allProducts.filter(p => {
+
+    const priceValue = parseInt(p.price) || 0;
+
+    const categoryMatch =
+      selectedCategory === "All" ||
+      (p.category || "").toLowerCase() === selectedCategory.toLowerCase();
+
+    const platformMatch =
+      selectedPlatform === "All" ||
+      (p.platform || "").toLowerCase() === selectedPlatform.toLowerCase();
+
+    const priceMatch =
+      priceValue >= minPrice && priceValue <= maxPrice;
+
+    const searchMatch =
+      p.title.toLowerCase().includes(searchText.toLowerCase()) ||
+      p.desc.toLowerCase().includes(searchText.toLowerCase());
+
+    return categoryMatch && platformMatch && priceMatch && searchMatch;
+  });
+
+  filtered.forEach(product => {
+
+    productsGrid.innerHTML += `
+      <div class="product-card">
+
+        <div class="product-image">
+          <img src="${product.image}">
+          <div class="platform-tag ${product.platform}">
+            ${product.platform}
+          </div>
+        </div>
+
+        <div class="product-info">
+          <h3>${product.title}</h3>
+          <p>${product.desc}</p>
+
+          <div class="product-bottom">
+            <h4>₹${product.price}</h4>
+
+            <a href="${product.link}" target="_blank">
+              Buy Now
+            </a>
+          </div>
+        </div>
+
+      </div>
+    `;
+  });
+}
+
+// ================= FILTER FUNCTIONS =================
+function setCategory(value) {
+  selectedCategory = value;
+  renderProducts();
+}
+
+function setPlatform(value) {
+  selectedPlatform = value;
+  renderProducts();
+}
+
+function applyCustomPrice() {
+  minPrice = parseInt(document.getElementById("minPrice").value) || 0;
+  maxPrice = parseInt(document.getElementById("maxPrice").value) || Infinity;
+  renderProducts();
+}
+
+// ================= SEARCH =================
+document.getElementById("searchInput").addEventListener("input", (e) => {
+  searchText = e.target.value;
+  renderProducts();
+});
+
 loadProducts();
 </script>
-
 </body>
 
 </html>
