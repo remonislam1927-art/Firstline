@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Admin Login</title>
 
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -31,7 +33,7 @@
 
 <script>
 
-// ================= FIREBASE =================
+// ================= FIREBASE CONFIG =================
 const firebaseConfig = {
   apiKey: "AIzaSyDH9OmFLoba7e8Sr6Vz5lruPiJtvznTQ2Y",
   authDomain: "firstline-1927.firebaseapp.com",
@@ -41,20 +43,26 @@ const firebaseConfig = {
   appId: "1:240292512608:web:1027ece3891e454def9405"
 };
 
+// INIT FIREBASE
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
 // ================= ADMIN EMAIL =================
 const ADMIN_EMAIL = "remonislam1927@gmail.com";
 
-// ================= LOGIN =================
+// ================= LOGIN SYSTEM =================
 document.getElementById("loginForm").addEventListener("submit", function(e){
-  
-  e.preventDefault();
+
+  e.preventDefault(); // 🚫 stop page refresh
 
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
   const errorBox = document.getElementById("error");
+
+  if(!email || !password){
+    errorBox.textContent = "Please fill all fields";
+    return;
+  }
 
   auth.signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
@@ -62,16 +70,17 @@ document.getElementById("loginForm").addEventListener("submit", function(e){
       const user = userCredential.user;
 
       // 🔐 ADMIN CHECK
-      if (user.email !== ADMIN_EMAIL) {
+      if(user.email !== ADMIN_EMAIL){
         errorBox.textContent = "Access denied: Not admin";
         auth.signOut();
         return;
       }
 
+      // ✅ SUCCESS
       window.location.href = "admin.html";
 
     })
-    .catch(err => {
+    .catch((err) => {
       errorBox.textContent = err.message;
     });
 
