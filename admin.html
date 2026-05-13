@@ -61,6 +61,14 @@ z-index:9999;
                 <option value="myntra">Myntra</option>
                 <option value="meesho">Meesho</option>
             </select>
+            <select id="productCategory">
+    <option value="Fashion">Fashion</option>
+    <option value="Electronics">Electronics</option>
+    <option value="Accessories">Accessories</option>
+    <option value="Gaming">Gaming</option>
+    <option value="Beauty">Beauty</option>
+    <option value="Shoes">Shoes</option>
+</select>
 
             <button onclick="addProduct()">Save Product</button>
 
@@ -192,6 +200,7 @@ function addProduct(){
         link,
         desc,
         platform,
+        category: productCategory.value,
         createdAt: Date.now()
     };
 
@@ -218,7 +227,7 @@ function editProduct(id){
         productLink.value = p.link;
         productDesc.value = p.desc;
         productPlatform.value = p.platform;
-
+        productCategory.value = p.category || "Fashion";
         uploadedImage = p.image;
         editId = id;
     });
