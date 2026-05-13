@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Panel</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="responsive.css">
+<link rel="stylesheet" href="admin.css">
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+</head>
+
+<body>
+
+<section class="admin-panel">
+
+    <div class="admin-container">
+
+        <!-- FORM -->
+        <div class="admin-box">
+
+            <h2>Add Product</h2>
+
+            <input type="text" id="productTitle" placeholder="Product Title">
+            <input type="text" id="productPrice" placeholder="Price">
+
+            <!-- IMAGE OPTIONS -->
+            <input type="text" id="productImage" placeholder="Image URL">
+
+            <input type="file" id="imageUpload" accept="image/*">
+
+            <input type="text" id="productLink" placeholder="Affiliate Link">
+
+            <textarea id="productDesc" placeholder="Description"></textarea>
+
+            <select id="productPlatform">
+                <option value="amazon">Amazon</option>
+                <option value="flipkart">Flipkart</option>
+                <option value="myntra">Myntra</option>
+                <option value="meesho">Meesho</option>
+            </select>
+
+            <button onclick="addProduct()">Save Product</button>
+
+        </div>
+
+        <!-- PRODUCT LIST -->
+        <div class="admin-products-list" id="adminProducts"></div>
+
+    </div>
+
+</section>
+
+<script>
+// ================= FIREBASE =================
+const firebaseConfig = {
+  apiKey: "AIzaSyDH9OmFLoba7e8Sr6Vz5lruPiJtvznQ2Y",
+  authDomain: "firstline-1927.firebaseapp.com",
+  projectId: "firstline-1927",
+  storageBucket: "firstline-1927.appspot.com",
+  messagingSenderId: "240292512608",
+  appId: "1:240292512608:web:1027ece3891e454def9405"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+// ================= STATE =================
+let editId = null;
+let uploadedImage = "";
+
+// ================= IMAGE UPLOAD (PC FILE) =================
+document.getElementById("imageUpload").addEventListener("change", function(e){
+
+    const file = e.target.files[0];
+    if(!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function(event){
+        uploadedImage = event.target.result;
+    };
+
+    reader.readAsDataURL(file);
+});
+
+// ================= LOAD PRODUCTS =================
+function loadProducts(){
+
+    const container = document.getElementById("adminProducts");
+
+    db.collection("products")
+    .orderBy("createdAt", "desc")
+    .onSnapshot(snapshot => {
+
+        container.innerHTML = "";
+
+        snapshot.forEach(doc => {
+
+            let p = doc.data();
+
+            container.innerHTML += `
+            <div class="admin-product-card">
+
+                <img src="${p.image}">
+
+                <div class="admin-product-info">
+                    <h3>${p.title}</h3>
+                    <p>${p.desc}</p>
+                    <h4>${p.price}</h4>
+                    <span>${p.platform}</span>
+                </div>
+
+                <div class="admin-product-buttons">
+
+                    <button onclick="editProduct('${doc.id}')">Edit</button>
+                    <button onclick="deleteProduct('${doc.id}')">Delete</button>
+
+                </div>
+
+            </div>
+            `;
+        });
+    });
+}
+
+loadProducts();
+
+// ================= ADD / UPDATE =================
+function addProduct(){
+
+    let title = document.getElementById("productTitle").value;
+    let price = document.getElementById("productPrice").value;
+
+    let image = uploadedImage || document.getElementById("productImage").value;
+
+    let link = document.getElementById("productLink").value;
+    let desc = document.getElementById("productDesc").value;
+    let platform = document.getElementById("productPlatform").value;
+
+    let data = {
+        title,
+        price,
+        image,
+        link,
+        desc,
+        platform,
+        createdAt: Date.now()
+    };
+
+    if(editId){
+
+        db.collection("products").doc(editId).update(data);
+        editId = null;
+
+    } else {
+
+        db.collection("products").add(data);
+    }
+
+    clearFields();
+    alert("Saved Successfully!");
+}
+
+// ================= EDIT =================
+function editProduct(id){
+
+    db.collection("products").doc(id).get().then(doc => {
+
+        let p = doc.data();
+
+        document.getElementById("productTitle").value = p.title;
+        document.getElementById("productPrice").value = p.price;
+        document.getElementById("productImage").value = p.image;
+        document.getElementById("productLink").value = p.link;
+        document.getElementById("productDesc").value = p.desc;
+        document.getElementById("productPlatform").value = p.platform;
+
+        editId = id;
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
+    });
+}
+
+// ================= DELETE =================
+function deleteProduct(id){
+    db.collection("products").doc(id).delete();
+}
+
+// ================= CLEAR =================
+function clearFields(){
+
+    document.getElementById("productTitle").value = "";
+    document.getElementById("productPrice").value = "";
+    document.getElementById("productImage").value = "";
+    document.getElementById("productLink").value = "";
+    document.getElementById("productDesc").value = "";
+
+    uploadedImage = "";
+}
+
+</script>
+
+</body>
+</html>

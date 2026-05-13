@@ -1,0 +1,45 @@
+[
+  {
+    "id": 1,
+    "title": "Premium Running Shoes",
+    "description": "Stylish modern running shoes with premium comfort.",
+    "price": "₹1,999",
+    "platform": "Amazon",
+    "category": "Fashion",
+    "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1000",
+    "affiliate": "https://amazon.in"
+  },
+
+  {
+    "id": 2,
+    "title": "Smart Watch Pro",
+    "description": "Fitness tracking with premium display.",
+    "price": "₹2,499",
+    "platform": "Flipkart",
+    "category": "Electronics",
+    "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000",
+    "affiliate": "https://flipkart.com"
+  },
+
+  {
+    "id": 3,
+    "title": "Wireless Headphones",
+    "description": "Crystal clear sound with deep bass.",
+    "price": "₹3,299",
+    "platform": "Myntra",
+    "category": "Accessories",
+    "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1000",
+    "affiliate": "https://myntra.com"
+  },
+
+  {
+    "id": 4,
+    "title": "Premium Fashion Hoodie",
+    "description": "Comfortable oversized stylish hoodie.",
+    "price": "₹1,299",
+    "platform": "Meesho",
+    "category": "Fashion",
+    "image": "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1000",
+    "affiliate": "https://meesho.com"
+  }
+]

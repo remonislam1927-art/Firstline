@@ -1,0 +1,584 @@
+/* ================= LARGE TABLETS ================= */
+
+@media(max-width: 1200px){
+
+    .products-grid{
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+/* ================= TABLET ================= */
+
+@media(max-width: 1100px){
+
+    /* HERO */
+
+    .hero{
+        flex-direction: column;
+
+        text-align: center;
+
+        gap: 70px;
+    }
+
+    .hero-left{
+        width: 100%;
+    }
+
+    .hero-right{
+        width: 100%;
+    }
+
+    .hero-buttons{
+        justify-content: center;
+    }
+
+    /* DEAL */
+
+    .deal-banner{
+        flex-direction: column;
+
+        text-align: center;
+
+        gap: 60px;
+    }
+
+    .deal-content{
+        width: 100%;
+    }
+
+    .deal-image{
+        width: 100%;
+    }
+
+    /* FOOTER */
+
+    .footer-top{
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
+
+/* ================= MEDIUM DEVICES ================= */
+
+@media(max-width: 992px){
+
+    /* CATEGORY */
+
+    .category-grid{
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+/* ================= MOBILE & TABLET ================= */
+
+@media(max-width: 768px){
+
+    /* NAVBAR */
+
+    .navbar{
+        padding: 18px 5%;
+    }
+
+    .nav-links{
+        display: flex;
+
+        gap: 18px;
+    }
+
+    .nav-links a{
+        font-size: 14px;
+    }
+
+    .logo-box{
+        width: 45px;
+        height: 45px;
+
+        font-size: 22px;
+    }
+
+    .brand-text{
+        font-size: 24px;
+    }
+
+    .search-box{
+        width: 170px;
+        height: 44px;
+    }
+
+    .search-box input{
+        font-size: 14px;
+    }
+
+    .menu-btn{
+        display: flex;
+    }
+
+    /* HERO */
+
+    .hero{
+        padding-top: 50px;
+    }
+
+    .hero-left h1{
+        font-size: 55px;
+
+        line-height: 70px;
+    }
+
+    .hero-left p{
+        font-size: 16px;
+
+        line-height: 30px;
+    }
+
+    .hero-right img{
+        width: 320px;
+        height: 320px;
+    }
+
+    /* CATEGORY */
+
+    .section-title h2{
+        font-size: 38px;
+    }
+
+    .category-card{
+        padding: 30px 24px;
+    }
+
+    .category-card h3{
+        font-size: 24px;
+    }
+
+    /* PRODUCTS */
+
+    .products-grid{
+        grid-template-columns: 1fr;
+    }
+
+    .product-image img{
+        height: 240px;
+    }
+
+    .product-info h3{
+        font-size: 22px;
+    }
+
+    .product-bottom h4{
+        font-size: 22px;
+    }
+
+    /* DEAL */
+
+    .deal-banner{
+        padding: 40px 25px;
+    }
+
+    .deal-content h2{
+        font-size: 48px;
+
+        line-height: 62px;
+    }
+
+    .deal-image img{
+        width: 300px;
+        height: 300px;
+    }
+
+    /* FOOTER */
+
+    .footer{
+        padding-top: 60px;
+    }
+
+    .footer-top{
+        grid-template-columns: 1fr;
+
+        gap: 45px;
+    }
+
+    .footer-logo h2{
+        font-size: 28px;
+    }
+
+    .footer-links h3{
+        font-size: 22px;
+    }
+
+    .footer-bottom{
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    /* MODAL */
+
+    .modal-box{
+        flex-direction: column;
+    }
+
+    .modal-image{
+        width: 100%;
+
+        height: 320px;
+    }
+
+    .modal-content{
+        width: 100%;
+    }
+
+    /* MOBILE NAV */
+
+    .mobile-bottom-nav{
+        display: flex;
+    }
+
+    body{
+        padding-bottom: 110px;
+    }
+
+}
+
+/* ================= SMALL MOBILE ================= */
+
+@media(max-width: 520px){
+
+    /* NAVBAR */
+
+    .navbar{
+        padding: 16px 4%;
+    }
+
+    .nav-links{
+        gap: 12px;
+    }
+
+    .nav-links a{
+        font-size: 13px;
+    }
+
+    .logo-box{
+        width: 42px;
+        height: 42px;
+
+        font-size: 20px;
+    }
+
+    .brand-text{
+        font-size: 21px;
+    }
+
+    .search-box{
+        width: 45px;
+        height: 45px;
+
+        padding: 0;
+
+        justify-content: center;
+    }
+
+    .search-box input{
+        display: none;
+    }
+
+    .search-box i{
+        font-size: 18px;
+    }
+
+    /* HERO */
+
+    .hero-left h1{
+        font-size: 42px;
+
+        line-height: 56px;
+    }
+
+    .hero-buttons{
+        flex-direction: column;
+
+        align-items: center;
+    }
+
+    .shop-btn,
+    .explore-btn{
+        width: 100%;
+
+        max-width: 280px;
+    }
+
+    .hero-right img{
+        width: 260px;
+        height: 260px;
+    }
+
+    /* CATEGORY */
+
+    .category-grid{
+        grid-template-columns: 1fr;
+    }
+
+    .section-title h2{
+        font-size: 32px;
+    }
+
+    /* PRODUCTS */
+
+    .product-info{
+        padding: 22px;
+    }
+
+    .product-bottom{
+        flex-direction: column;
+
+        gap: 18px;
+
+        align-items: flex-start;
+    }
+
+    .product-bottom a{
+        width: 100%;
+    }
+
+    /* DEAL */
+
+    .deal-content h2{
+        font-size: 38px;
+
+        line-height: 50px;
+    }
+
+    .deal-content p{
+        font-size: 16px;
+
+        line-height: 30px;
+    }
+
+    .deal-content button{
+        width: 100%;
+    }
+
+    .deal-image img{
+        width: 240px;
+        height: 240px;
+    }
+
+    /* FOOTER */
+
+    .social-icons{
+        flex-wrap: wrap;
+    }
+
+    .footer-logo-box{
+        width: 50px;
+        height: 50px;
+    }
+
+    .footer-logo h2{
+        font-size: 24px;
+    }
+
+    /* MODAL */
+
+    .modal-content{
+        padding: 40px 25px;
+    }
+
+    .modal-content h2{
+        font-size: 34px;
+
+        line-height: 44px;
+    }
+
+    .modal-content h3{
+        font-size: 32px;
+    }
+
+    .modal-content a{
+        width: 100%;
+    }
+
+}
+/* ================= NAVBAR RESPONSIVE ================= */
+
+@media(max-width: 1200px){
+
+    .navbar{
+        padding: 18px 5%;
+    }
+
+    .nav-center{
+        gap: 28px;
+    }
+}
+
+/* ================= TABLET ================= */
+
+@media(max-width: 992px){
+
+    .brand-text{
+        font-size: 26px;
+    }
+
+    .nav-center{
+        gap: 20px;
+    }
+
+    .nav-center a{
+        font-size: 15px;
+    }
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width: 768px){
+
+    .navbar{
+        min-height: auto;
+
+        padding: 16px 5%;
+
+        flex-wrap: nowrap;
+    }
+
+    .logo{
+        gap: 12px;
+    }
+
+    .logo-box{
+        width: 44px;
+        height: 44px;
+
+        font-size: 22px;
+
+        border-radius: 14px;
+    }
+
+    .brand-text{
+        font-size: 23px;
+    }
+
+    /* HIDE DESKTOP NAV */
+
+    .nav-center{
+        display: none;
+    }
+
+    /* SHOW MOBILE BUTTON */
+
+    .menu-btn{
+        display: flex;
+
+        width: 44px;
+        height: 44px;
+
+        border-radius: 12px;
+
+        flex-shrink: 0;
+    }
+
+    .menu-btn i{
+        font-size: 18px;
+    }
+
+    /* MOBILE MENU */
+
+    .mobile-menu{
+        display: none;
+
+        width: 100%;
+
+        background: #111827;
+
+        padding: 22px 5%;
+
+        flex-direction: column;
+
+        gap: 18px;
+
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .mobile-menu.active{
+        display: flex;
+    }
+
+    .mobile-menu a{
+        color: white;
+
+        font-size: 16px;
+        font-weight: 500;
+
+        transition: 0.3s;
+    }
+
+    .mobile-menu a:hover{
+        color: #ff4d8d;
+    }
+}
+
+/* ================= SMALL MOBILE ================= */
+
+@media(max-width: 520px){
+
+    .navbar{
+        padding: 14px 4%;
+    }
+
+    .logo{
+        gap: 10px;
+    }
+
+    .logo-box{
+        width: 40px;
+        height: 40px;
+
+        font-size: 20px;
+
+        border-radius: 12px;
+    }
+
+    .brand-text{
+        font-size: 20px;
+    }
+
+    .menu-btn{
+        width: 40px;
+        height: 40px;
+    }
+
+    .menu-btn i{
+        font-size: 16px;
+    }
+
+    .mobile-menu{
+        padding: 20px 4%;
+    }
+
+    .mobile-menu a{
+        font-size: 15px;
+    }
+}
+
+/* ================= EXTRA SMALL DEVICES ================= */
+
+@media(max-width: 380px){
+
+    .brand-text{
+        font-size: 18px;
+    }
+
+    .logo-box{
+        width: 38px;
+        height: 38px;
+
+        font-size: 18px;
+    }
+
+    .menu-btn{
+        width: 38px;
+        height: 38px;
+    }
+}

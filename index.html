@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Firstline</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="responsive.css" />
+
+  <!-- Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <!-- LEFT -->
+
+    <div class="nav-left">
+
+        <a href="index.html" class="logo">
+
+            <div class="logo-box">
+                F
+            </div>
+
+            <h2 class="brand-text">
+                Firstline
+            </h2>
+
+        </a>
+
+    </div>
+
+    <!-- CENTER NAVIGATION -->
+
+    <div class="nav-center">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="products.html">
+            Products
+        </a>
+
+        <a href="#categories">
+            Categories
+        </a>
+
+        <a href="#footer">
+            About
+        </a>
+
+    </div>
+
+    <!-- RIGHT -->
+
+    <div class="nav-right">
+
+        <!-- MENU BUTTON -->
+
+        <div class="menu-btn" id="menuBtn">
+
+            <i class="fa-solid fa-bars"></i>
+
+        </div>
+
+    </div>
+
+</nav>
+
+<!-- ================= MOBILE MENU ================= -->
+
+<div class="mobile-menu" id="mobileMenu">
+
+    <a href="index.html">
+        Home
+    </a>
+
+    <a href="products.html">
+        Products
+    </a>
+
+    <a href="#categories">
+        Categories
+    </a>
+
+    <a href="#footer">
+        About
+    </a>
+
+</div>
+
+  <!-- ================= HERO SECTION ================= -->
+
+<section class="hero">
+
+  <div class="hero-left">
+
+    <span class="hero-tag">
+      #1 Affiliate Shopping Hub
+    </span>
+
+    <h1>
+      Shop Smarter <br>
+      With <span>Firstline</span>
+    </h1>
+
+    <p>
+      Discover trending products from Amazon, Flipkart,
+      Meesho and Myntra — all in one premium shopping platform.
+    </p>
+
+    <div class="hero-buttons">
+<a href="products.html">
+      <button class="shop-btn">
+        Shop Now
+      </button>
+
+      <button class="explore-btn">
+        Explore Deals
+      </button>
+</a>
+    </div>
+
+  </div>
+
+  <!-- RIGHT -->
+
+  <div class="hero-right">
+
+    <div class="circle circle1"></div>
+    <div class="circle circle2"></div>
+
+    <img
+      src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000"
+      alt="product"
+    />
+
+  </div>
+
+</section>
+<!-- ================= CATEGORIES ================= -->
+
+<section class="categories">
+
+  <div class="section-title">
+
+    <span>Top Categories</span>
+
+    <h2>
+      Shop By Category
+    </h2>
+
+  </div>
+
+  <div class="category-grid">
+
+    <!-- CARD -->
+
+    <div class="category-card">
+
+      <div class="category-icon pink">
+        <i class="fa-solid fa-shirt"></i>
+      </div>
+
+      <h3>Fashion</h3>
+
+      <p>
+        Trending styles and outfits
+      </p>
+
+    </div>
+
+    <!-- CARD -->
+
+    <div class="category-card">
+
+      <div class="category-icon purple">
+        <i class="fa-solid fa-laptop"></i>
+      </div>
+
+      <h3>Electronics</h3>
+
+      <p>
+        Smart gadgets and devices
+      </p>
+
+    </div>
+
+    <!-- CARD -->
+
+    <div class="category-card">
+
+      <div class="category-icon blue">
+        <i class="fa-solid fa-gamepad"></i>
+      </div>
+
+      <h3>Gaming</h3>
+
+      <p>
+        Gaming accessories & gear
+      </p>
+
+    </div>
+
+    <!-- CARD -->
+
+    <div class="category-card">
+
+      <div class="category-icon orange">
+        <i class="fa-solid fa-shoe-prints"></i>
+      </div>
+
+      <h3>Shoes</h3>
+
+      <p>
+        Premium footwear collection
+      </p>
+
+    </div>
+
+    <!-- CARD -->
+
+    <div class="category-card">
+
+      <div class="category-icon red">
+        <i class="fa-solid fa-heart"></i>
+      </div>
+
+      <h3>Beauty</h3>
+
+      <p>
+        Makeup and skincare products
+      </p>
+
+    </div>
+
+    <!-- CARD -->
+
+    <div class="category-card">
+
+      <div class="category-icon green">
+        <i class="fa-solid fa-headphones"></i>
+      </div>
+
+      <h3>Accessories</h3>
+
+      <p>
+        Stylish modern accessories
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+<!-- ================= TRENDING PRODUCTS ================= -->
+
+<section class="trending-products">
+
+  <div class="section-title">
+
+    <span>Trending Products</span>
+
+    <h2>
+      Best Selling Products
+    </h2>
+
+  </div>
+
+ <div class="products-grid" id="featuredProducts"></div>
+
+<div class="view-all-container">
+
+  <a href="products.html" class="view-all-btn">
+    View All Products
+  </a>
+
+</div>
+
+
+</section>
+<!-- ================= DEAL BANNER ================= -->
+
+<section class="deal-banner">
+
+  <div class="deal-content">
+
+    <span>
+      Limited Time Offer
+    </span>
+
+    <h2>
+      Up To 70% OFF <br>
+      On Trending Products
+    </h2>
+
+    <p>
+      Explore exclusive deals from Amazon, Flipkart,
+      Myntra and Meesho with premium discounts.
+    </p>
+
+    <button>
+      Explore Deals
+    </button>
+
+  </div>
+
+  <!-- RIGHT -->
+
+  <div class="deal-image">
+
+    <div class="deal-glow glow1"></div>
+    <div class="deal-glow glow2"></div>
+
+    <img
+      src="https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?q=80&w=1000"
+      alt="deal"
+    />
+
+  </div>
+
+</section>
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+  <div class="footer-top">
+
+    <!-- LEFT -->
+
+    <div class="footer-brand">
+
+      <div class="footer-logo">
+
+        <div class="footer-logo-box">
+          F
+        </div>
+
+<a href="index.html">
+  <h2>Firstline</h2>
+</a>
+
+      </div>
+
+      <p>
+        Firstline is a premium affiliate shopping platform
+        where products from Amazon, Flipkart, Myntra
+        and Meesho are combined into one modern shopping experience.
+      </p>
+
+      <div class="social-icons">
+
+        <a href="#">
+          <i class="fa-brands fa-facebook-f"></i>
+        </a>
+
+        <a href="#">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+
+        <a href="#">
+          <i class="fa-brands fa-x-twitter"></i>
+        </a>
+
+        <a href="#">
+          <i class="fa-brands fa-youtube"></i>
+        </a>
+
+      </div>
+
+    </div>
+
+    <!-- LINKS -->
+
+    <div class="footer-links">
+
+      <h3>Quick Links</h3>
+
+      <a href="#">Home</a>
+      <a href="#">Products</a>
+      <a href="#">Trending</a>
+      <a href="#">Deals</a>
+
+    </div>
+
+    <!-- CATEGORY -->
+
+    <div class="footer-links">
+
+      <h3>Categories</h3>
+
+      <a href="#">Fashion</a>
+      <a href="#">Electronics</a>
+      <a href="#">Gaming</a>
+      <a href="#">Accessories</a>
+
+    </div>
+
+    <!-- SUPPORT -->
+
+    <div class="footer-links">
+
+      <h3>Support</h3>
+
+      <a href="#">Privacy Policy</a>
+      <a href="#">Affiliate Disclosure</a>
+      <a href="#">Terms & Conditions</a>
+      <a href="#">Contact</a>
+
+    </div>
+
+  </div>
+
+  <!-- BOTTOM -->
+
+  <div class="footer-bottom">
+
+    <p>
+      © 2026 Firstline. All Rights Reserved.
+    </p>
+
+    <p>
+      This website contains affiliate links. We may earn commissions
+      from qualifying purchases.
+    </p>
+
+  </div>
+
+</footer>
+<!-- ================= PRODUCT MODAL ================= -->
+
+<div class="product-modal" id="productModal">
+
+  <div class="modal-box">
+
+    <!-- CLOSE -->
+
+    <div class="close-modal" id="closeModal">
+      <i class="fa-solid fa-xmark"></i>
+    </div>
+
+    <!-- LEFT -->
+
+    <div class="modal-image">
+
+      <img
+        src=""
+        id="modalImg"
+        alt="product"
+      />
+
+    </div>
+
+    <!-- RIGHT -->
+
+    <div class="modal-content">
+
+      <span id="modalPlatform">
+        Amazon
+      </span>
+
+      <h2 id="modalTitle">
+        Product Name
+      </h2>
+
+      <p id="modalDesc">
+        Product Description
+      </p>
+
+      <h3 id="modalPrice">
+        ₹1999
+      </h3>
+
+      <a
+        href="#"
+        id="modalBtn"
+        target="_blank"
+      >
+        Buy Now
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+
+  <!-- JS -->
+  <script src="app.js"></script>
+  <script src="products.js"></script>
+  <script src="search.js"></script>
+<!-- ================= MOBILE BOTTOM NAV ================= -->
+</body>
+</html>

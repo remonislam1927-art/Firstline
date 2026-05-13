@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>
+    Firstline Products
+  </title>
+
+  <!-- CSS -->
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="responsive.css" />
+
+  <!-- FONT AWESOME -->
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+
+</head>
+
+<body>
+
+  <!-- ================= NAVBAR ================= -->
+
+  <nav class="navbar">
+
+    <!-- LOGO -->
+
+    <a href="index.html" class="logo">
+
+      <div class="logo-box">
+        F
+      </div>
+
+      <h2>Firstline</h2>
+
+    </a>
+
+    <!-- SEARCH -->
+
+    <div class="search-box">
+
+      <i class="fa-solid fa-magnifying-glass"></i>
+
+      <input
+        type="text"
+        placeholder="Search products..."
+        id="searchInput"
+      />
+
+    </div>
+
+  </nav>
+
+  <!-- ================= PRODUCTS PAGE ================= -->
+
+  <section class="products-page">
+
+    <!-- TITLE -->
+
+    <div class="section-title">
+
+      <span>All Products</span>
+
+      <h2>
+        Explore Products
+      </h2>
+
+    </div>
+
+    <!-- ================= FILTERS ================= -->
+
+    <div class="filter-buttons">
+
+      <button class="filter-btn active" data-category="All">
+        All
+      </button>
+
+      <button class="filter-btn" data-category="Fashion">
+        Fashion
+      </button>
+
+      <button class="filter-btn" data-category="Electronics">
+        Electronics
+      </button>
+
+      <button class="filter-btn" data-category="Accessories">
+        Accessories
+      </button>
+
+      <button class="filter-btn" data-category="Gaming">
+        Gaming
+      </button>
+
+    </div>
+
+    <!-- PRODUCTS GRID -->
+
+<div class="products-grid" id="productsGrid">
+
+</div>
+
+  </section>
+
+  <!-- JS -->
+   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyDH9OmFLoba7e8Sr6Vz5lruPiJtvznTQ2Y",
+  authDomain: "firstline-1927.firebaseapp.com",
+  projectId: "firstline-1927",
+  storageBucket: "firstline-1927.appspot.com",
+  messagingSenderId: "240292512608",
+  appId: "1:240292512608:web:1027ece3891e454def9405"
+};
+
+// INIT FIREBASE
+firebase.initializeApp(firebaseConfig);
+
+// DATABASE
+const db = firebase.firestore();
+</script>
+
+  <script src="js/products.js"></script>
+  <script>
+
+let productsGrid = document.getElementById("productsGrid");
+
+let products = JSON.parse(localStorage.getItem("products")) || [];
+
+products.forEach(product => {
+
+    productsGrid.innerHTML += `
+
+    <div class="product-card">
+
+        <div class="product-image">
+
+            <img src="${product.image}">
+
+            <div class="platform-tag ${product.platform}">
+                ${product.platform}
+            </div>
+
+        </div>
+
+        <div class="product-info">
+
+            <h3>${product.title}</h3>
+
+            <p>${product.desc}</p>
+
+            <div class="product-bottom">
+
+                <h4>${product.price}</h4>
+
+                <a href="${product.link}" target="_blank">
+                    Buy Now
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    `;
+
+});
+
+</script>
+
+</body>
+
+</html>
