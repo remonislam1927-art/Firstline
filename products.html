@@ -113,7 +113,7 @@
   </section>
 
   <!-- JS -->
-   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
 <script>
@@ -128,58 +128,53 @@ const firebaseConfig = {
 
 // INIT FIREBASE
 firebase.initializeApp(firebaseConfig);
-
-// DATABASE
 const db = firebase.firestore();
-</script>
 
-  <script src="js/products.js"></script>
-  <script>
+const productsGrid = document.getElementById("productsGrid");
 
-let productsGrid = document.getElementById("productsGrid");
+function loadProducts() {
 
-let products = JSON.parse(localStorage.getItem("products")) || [];
+    db.collection("products")
+      .orderBy("createdAt", "desc")
+      .onSnapshot(snapshot => {
 
-products.forEach(product => {
+        productsGrid.innerHTML = "";
 
-    productsGrid.innerHTML += `
+        snapshot.forEach(doc => {
 
-    <div class="product-card">
+            let product = doc.data();
 
-        <div class="product-image">
+            productsGrid.innerHTML += `
+                <div class="product-card">
 
-            <img src="${product.image}">
+                    <div class="product-image">
+                        <img src="${product.image}">
+                        <div class="platform-tag ${product.platform}">
+                            ${product.platform}
+                        </div>
+                    </div>
 
-            <div class="platform-tag ${product.platform}">
-                ${product.platform}
-            </div>
+                    <div class="product-info">
+                        <h3>${product.title}</h3>
+                        <p>${product.desc}</p>
 
-        </div>
+                        <div class="product-bottom">
+                            <h4>${product.price}</h4>
 
-        <div class="product-info">
+                            <a href="${product.link}" target="_blank">
+                                Buy Now
+                            </a>
+                        </div>
+                    </div>
 
-            <h3>${product.title}</h3>
+                </div>
+            `;
+        });
 
-            <p>${product.desc}</p>
+    });
+}
 
-            <div class="product-bottom">
-
-                <h4>${product.price}</h4>
-
-                <a href="${product.link}" target="_blank">
-                    Buy Now
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    `;
-
-});
-
+loadProducts();
 </script>
 
 </body>
