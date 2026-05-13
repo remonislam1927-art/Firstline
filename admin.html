@@ -20,7 +20,23 @@
 
 <body>
 
-<section class="admin-panel">
+<!-- 🔐 BLOCK UI UNTIL AUTH -->
+<div id="blockedScreen" style="
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:#0f172a;
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+z-index:9999;
+">
+    <h2>🔐 Checking Access...</h2>
+</div>
+
+<section class="admin-panel" id="adminPanel" style="display:none;">
 
     <div class="admin-container">
 
@@ -32,7 +48,6 @@
             <input type="text" id="productTitle" placeholder="Product Title">
             <input type="text" id="productPrice" placeholder="Price">
 
-            <!-- IMAGE OPTIONS -->
             <input type="text" id="productImage" placeholder="Image URL">
             <input type="file" id="imageUpload" accept="image/*">
 
@@ -51,7 +66,7 @@
 
         </div>
 
-        <!-- PRODUCT LIST -->
+        <!-- LIST -->
         <div class="admin-products-list" id="adminProducts"></div>
 
     </div>
@@ -60,6 +75,7 @@
 
 <script>
 const ADMIN_EMAIL = "remonislam1927@gmail.com";
+
 // ================= FIREBASE =================
 const firebaseConfig = {
   apiKey: "AIzaSyDH9OmFLoba7e8Sr6Vz5lruPiJtvznTQ2Y",
@@ -79,7 +95,7 @@ const auth = firebase.auth();
 let editId = null;
 let uploadedImage = "";
 
-// ================= AUTH GUARD =================
+// ================= SECURE GUARD (IMPORTANT) =================
 auth.onAuthStateChanged(user => {
 
     if (!user) {
@@ -87,16 +103,19 @@ auth.onAuthStateChanged(user => {
         return;
     }
 
-    // 🔐 ROLE CHECK (IMPORTANT)
     if (user.email !== ADMIN_EMAIL) {
-        alert("Access denied: Not an admin");
+        alert("Access denied!");
         auth.signOut();
         window.location.href = "login.html";
         return;
     }
 
+    document.getElementById("blockedScreen").style.display = "none";
+    document.getElementById("adminPanel").style.display = "block";
+
     loadProducts();
 });
+
 // ================= IMAGE UPLOAD =================
 document.getElementById("imageUpload").addEventListener("change", function(e){
 
@@ -112,21 +131,16 @@ document.getElementById("imageUpload").addEventListener("change", function(e){
     reader.readAsDataURL(file);
 });
 
-// ================= LOAD PRODUCTS =================
+// ================= LOAD =================
 function loadProducts(){
 
     const container = document.getElementById("adminProducts");
 
     db.collection("products")
-    .orderBy("createdAt", "desc")
+    .orderBy("createdAt","desc")
     .onSnapshot(snapshot => {
 
         container.innerHTML = "";
-
-        if(snapshot.empty){
-            container.innerHTML = "<p>No products found</p>";
-            return;
-        }
 
         snapshot.forEach(doc => {
 
@@ -146,18 +160,12 @@ function loadProducts(){
 
                 <div class="admin-product-buttons">
 
-                    <button onclick="editProduct('${doc.id}')">
-                        Edit
-                    </button>
-
-                    <button onclick="deleteProduct('${doc.id}')">
-                        Delete
-                    </button>
+                    <button onclick="editProduct('${doc.id}')">Edit</button>
+                    <button onclick="deleteProduct('${doc.id}')">Delete</button>
 
                 </div>
 
-            </div>
-            `;
+            </div>`;
         });
     });
 }
@@ -165,12 +173,12 @@ function loadProducts(){
 // ================= ADD / UPDATE =================
 function addProduct(){
 
-    const title = document.getElementById("productTitle").value.trim();
-    const price = document.getElementById("productPrice").value.trim();
-    const imageUrl = document.getElementById("productImage").value.trim();
-    const link = document.getElementById("productLink").value.trim();
-    const desc = document.getElementById("productDesc").value.trim();
-    const platform = document.getElementById("productPlatform").value;
+    const title = productTitle.value.trim();
+    const price = productPrice.value.trim();
+    const imageUrl = productImage.value.trim();
+    const link = productLink.value.trim();
+    const desc = productDesc.value.trim();
+    const platform = productPlatform.value;
 
     if(!title || !price || !link){
         alert("Fill required fields");
@@ -195,7 +203,6 @@ function addProduct(){
     }
 
     clearFields();
-    alert("Product saved successfully!");
 }
 
 // ================= EDIT =================
@@ -203,52 +210,37 @@ function editProduct(id){
 
     db.collection("products").doc(id).get().then(doc => {
 
-        if(!doc.exists) return;
-
         const p = doc.data();
 
-        document.getElementById("productTitle").value = p.title;
-        document.getElementById("productPrice").value = p.price;
-        document.getElementById("productImage").value = p.image;
-        document.getElementById("productLink").value = p.link;
-        document.getElementById("productDesc").value = p.desc;
-        document.getElementById("productPlatform").value = p.platform;
+        productTitle.value = p.title;
+        productPrice.value = p.price;
+        productImage.value = p.image;
+        productLink.value = p.link;
+        productDesc.value = p.desc;
+        productPlatform.value = p.platform;
 
         uploadedImage = p.image;
         editId = id;
-
-        window.scrollTo({ top: 0, behavior: "smooth" });
     });
 }
 
 // ================= DELETE =================
 function deleteProduct(id){
-
-    if(confirm("Delete this product?")){
-        db.collection("products").doc(id).delete();
-    }
+    db.collection("products").doc(id).delete();
 }
 
 // ================= CLEAR =================
 function clearFields(){
 
-    document.getElementById("productTitle").value = "";
-    document.getElementById("productPrice").value = "";
-    document.getElementById("productImage").value = "";
-    document.getElementById("productLink").value = "";
-    document.getElementById("productDesc").value = "";
+    productTitle.value = "";
+    productPrice.value = "";
+    productImage.value = "";
+    productLink.value = "";
+    productDesc.value = "";
 
     uploadedImage = "";
     editId = null;
 }
-
-// ================= LOGOUT =================
-function logout(){
-    auth.signOut().then(() => {
-        window.location.href = "login.html";
-    });
-}
-
 </script>
 
 </body>
