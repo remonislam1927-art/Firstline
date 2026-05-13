@@ -16,7 +16,6 @@
 
     <h2>Admin Login</h2>
 
-    <!-- FORM (IMPORTANT FIX) -->
     <form id="loginForm">
 
       <input type="email" id="email" placeholder="Email" required>
@@ -31,6 +30,7 @@
   </div>
 
 <script>
+
 // ================= FIREBASE =================
 const firebaseConfig = {
   apiKey: "AIzaSyDH9OmFLoba7e8Sr6Vz5lruPiJtvznTQ2Y",
@@ -44,18 +44,32 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
+// ================= ADMIN EMAIL =================
+const ADMIN_EMAIL = "remonislam1927@gmail.com";
+
 // ================= LOGIN =================
 document.getElementById("loginForm").addEventListener("submit", function(e){
   
-  e.preventDefault(); // 🔥 THIS FIXES PAGE REFRESH ISSUE
+  e.preventDefault();
 
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
   const errorBox = document.getElementById("error");
 
   auth.signInWithEmailAndPassword(email, password)
-    .then(() => {
+    .then((userCredential) => {
+
+      const user = userCredential.user;
+
+      // 🔐 ADMIN CHECK
+      if (user.email !== ADMIN_EMAIL) {
+        errorBox.textContent = "Access denied: Not admin";
+        auth.signOut();
+        return;
+      }
+
       window.location.href = "admin.html";
+
     })
     .catch(err => {
       errorBox.textContent = err.message;
