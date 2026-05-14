@@ -701,3 +701,126 @@ body{
     color: inherit;
     margin: 0;
 }
+/* BLOG SECTION */
+
+.blog-section {
+    padding: 100px 6%;
+    background:
+        radial-gradient(circle at top left,
+        rgba(255, 77, 141, 0.08),
+        transparent 30%),
+
+        radial-gradient(circle at bottom right,
+        rgba(124, 58, 237, 0.08),
+        transparent 30%),
+
+        #0f172a;
+}
+
+.blog-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.blog-header h2 {
+    font-size: 42px;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.blog-header p {
+    color: #bdbdbd;
+    font-size: 18px;
+}
+
+.blog-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.blog-card {
+    background: #1a1a1a;
+    border-radius: 18px;
+    overflow: hidden;
+    transition: 0.3s ease;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.blog-card:hover {
+    transform: translateY(-8px);
+}
+
+.blog-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.blog-content {
+    padding: 20px;
+}
+
+.blog-content h3 {
+    color: white;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.blog-content p {
+    color: #cfcfcf;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.blog-btn {
+    display: inline-block;
+    padding: 12px 20px;
+    background: white;
+    color: black;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+.blog-btn:hover {
+    background: #dcdcdc;
+}
+/* BLOG PAGE */
+
+.blog-page {
+    padding: 80px 20px;
+    background: #0f0f0f;
+    min-height: 100vh;
+}
+
+.blog-page-container {
+    max-width: 900px;
+    margin: auto;
+}
+
+.blog-page-container h1 {
+    color: white;
+    font-size: 48px;
+    margin-bottom: 30px;
+}
+
+.blog-page-container h2 {
+    color: white;
+    margin-top: 40px;
+    margin-bottom: 15px;
+}
+
+.blog-page-container p {
+    color: #d0d0d0;
+    line-height: 1.9;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.blog-page-container img {
+    width: 100%;
+    border-radius: 16px;
+    margin-bottom: 30px;
+}
