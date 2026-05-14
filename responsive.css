@@ -1,584 +1,558 @@
-/* ================= LARGE TABLETS ================= */
+/* =========================================================
+   RESPONSIVE SYSTEM (INTEGRATED & FIXED)
+   ========================================================= */
 
-@media(max-width: 1200px){
-
-    .products-grid{
-        grid-template-columns: repeat(2, 1fr);
-    }
-
+/* GLOBAL FIXES */
+body {
+    overflow-x: hidden;
 }
 
-/* ================= TABLET ================= */
-
-@media(max-width: 1100px){
-
-    /* HERO */
-
-    .hero{
-        flex-direction: column;
-
-        text-align: center;
-
-        gap: 70px;
-    }
-
-    .hero-left{
-        width: 100%;
-    }
-
-    .hero-right{
-        width: 100%;
-    }
-
-    .hero-buttons{
-        justify-content: center;
-    }
-
-    /* DEAL */
-
-    .deal-banner{
-        flex-direction: column;
-
-        text-align: center;
-
-        gap: 60px;
-    }
-
-    .deal-content{
-        width: 100%;
-    }
-
-    .deal-image{
-        width: 100%;
-    }
-
-    /* FOOTER */
-
-    .footer-top{
-        grid-template-columns: 1fr 1fr;
-    }
-
+img {
+    max-width: 100%;
+    height: auto;
 }
 
-/* ================= MEDIUM DEVICES ================= */
-
-@media(max-width: 992px){
-
-    /* CATEGORY */
-
-    .category-grid{
-        grid-template-columns: repeat(2, 1fr);
-    }
-
+/* ================= GRID BASE (DESKTOP) ================= */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Default for large screens */
+    gap: 25px;
+    padding: 20px 6%;
+    box-sizing: border-box;
 }
 
-/* ================= MOBILE & TABLET ================= */
-
-@media(max-width: 768px){
-
-    /* NAVBAR */
-
-    .navbar{
-        padding: 18px 5%;
-    }
-
-    .nav-links{
-        display: flex;
-
-        gap: 18px;
-    }
-
-    .nav-links a{
-        font-size: 14px;
-    }
-
-    .logo-box{
-        width: 45px;
-        height: 45px;
-
-        font-size: 22px;
-    }
-
-    .brand-text{
-        font-size: 24px;
-    }
-
-    .search-box{
-        width: 170px;
-        height: 44px;
-    }
-
-    .search-box input{
-        font-size: 14px;
-    }
-
-    .menu-btn{
-        display: flex;
-    }
-
-    /* HERO */
-
-    .hero{
-        padding-top: 50px;
-    }
-
-    .hero-left h1{
-        font-size: 55px;
-
-        line-height: 70px;
-    }
-
-    .hero-left p{
-        font-size: 16px;
-
-        line-height: 30px;
-    }
-
-    .hero-right img{
-        width: 320px;
-        height: 320px;
-    }
-
-    /* CATEGORY */
-
-    .section-title h2{
-        font-size: 38px;
-    }
-
-    .category-card{
-        padding: 30px 24px;
-    }
-
-    .category-card h3{
-        font-size: 24px;
-    }
-
-    /* PRODUCTS */
-
-    .products-grid{
-        grid-template-columns: 1fr;
-    }
-
-    .product-image img{
-        height: 240px;
-    }
-
-    .product-info h3{
-        font-size: 22px;
-    }
-
-    .product-bottom h4{
-        font-size: 22px;
-    }
-
-    /* DEAL */
-
-    .deal-banner{
-        padding: 40px 25px;
-    }
-
-    .deal-content h2{
-        font-size: 48px;
-
-        line-height: 62px;
-    }
-
-    .deal-image img{
-        width: 300px;
-        height: 300px;
-    }
-
-    /* FOOTER */
-
-    .footer{
-        padding-top: 60px;
-    }
-
-    .footer-top{
-        grid-template-columns: 1fr;
-
-        gap: 45px;
-    }
-
-    .footer-logo h2{
-        font-size: 28px;
-    }
-
-    .footer-links h3{
-        font-size: 22px;
-    }
-
-    .footer-bottom{
-        flex-direction: column;
-
-        align-items: flex-start;
-    }
-
-    /* MODAL */
-
-    .modal-box{
-        flex-direction: column;
-    }
-
-    .modal-image{
-        width: 100%;
-
-        height: 320px;
-    }
-
-    .modal-content{
-        width: 100%;
-    }
-
-    /* MOBILE NAV */
-
-    .mobile-bottom-nav{
-        display: flex;
-    }
-
-    body{
-        padding-bottom: 110px;
-    }
-
-}
-
-/* ================= SMALL MOBILE ================= */
-
-@media(max-width: 520px){
-
-    /* NAVBAR */
-
-    .navbar{
-        padding: 16px 4%;
-    }
-
-    .nav-links{
-        gap: 12px;
-    }
-
-    .nav-links a{
-        font-size: 13px;
-    }
-
-    .logo-box{
-        width: 42px;
-        height: 42px;
-
-        font-size: 20px;
-    }
-
-    .brand-text{
-        font-size: 21px;
-    }
-
-    .search-box{
-        width: 45px;
-        height: 45px;
-
-        padding: 0;
-
-        justify-content: center;
-    }
-
-    .search-box input{
-        display: none;
-    }
-
-    .search-box i{
-        font-size: 18px;
-    }
-
-    /* HERO */
-
-    .hero-left h1{
-        font-size: 42px;
-
-        line-height: 56px;
-    }
-
-    .hero-buttons{
-        flex-direction: column;
-
-        align-items: center;
-    }
-
-    .shop-btn,
-    .explore-btn{
-        width: 100%;
-
-        max-width: 280px;
-    }
-
-    .hero-right img{
-        width: 260px;
-        height: 260px;
-    }
-
-    /* CATEGORY */
-
-    .category-grid{
-        grid-template-columns: 1fr;
-    }
-
-    .section-title h2{
-        font-size: 32px;
-    }
-
-    /* PRODUCTS */
-
-    .product-info{
-        padding: 22px;
-    }
-
-    .product-bottom{
-        flex-direction: column;
-
-        gap: 18px;
-
-        align-items: flex-start;
-    }
-
-    .product-bottom a{
-        width: 100%;
-    }
-
-    /* DEAL */
-
-    .deal-content h2{
-        font-size: 38px;
-
-        line-height: 50px;
-    }
-
-    .deal-content p{
-        font-size: 16px;
-
-        line-height: 30px;
-    }
-
-    .deal-content button{
-        width: 100%;
-    }
-
-    .deal-image img{
-        width: 240px;
-        height: 240px;
-    }
-
-    /* FOOTER */
-
-    .social-icons{
-        flex-wrap: wrap;
-    }
-
-    .footer-logo-box{
-        width: 50px;
-        height: 50px;
-    }
-
-    .footer-logo h2{
-        font-size: 24px;
-    }
-
-    /* MODAL */
-
-    .modal-content{
-        padding: 40px 25px;
-    }
-
-    .modal-content h2{
-        font-size: 34px;
-
-        line-height: 44px;
-    }
-
-    .modal-content h3{
-        font-size: 32px;
-    }
-
-    .modal-content a{
-        width: 100%;
-    }
-
-}
-/* ================= NAVBAR RESPONSIVE ================= */
-
-@media(max-width: 1200px){
-
-    .navbar{
-        padding: 18px 5%;
-    }
-
-    .nav-center{
-        gap: 28px;
-    }
-}
-
-/* ================= TABLET ================= */
-
-@media(max-width: 992px){
-
-    .brand-text{
-        font-size: 26px;
-    }
-
-    .nav-center{
+/* ================= LARGE TABLETS / SMALL LAPTOPS (1200px) ================= */
+@media (max-width: 1200px) {
+    .products-grid {
+        grid-template-columns: repeat(3, 1fr);
         gap: 20px;
     }
 
-    .nav-center a{
-        font-size: 15px;
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 60px 6%;
+        min-height: auto;
+    }
+
+    .hero-left, .hero-right {
+        width: 100%;
+    }
+
+    .hero-left h1 {
+        font-size: 60px;
+        line-height: 70px;
+    }
+
+    .hero-left p {
+        margin: 25px auto;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .deal-banner {
+        flex-direction: column;
+        text-align: center;
+        width: 92%;
+        padding: 40px;
+    }
+
+    .deal-content, .deal-image {
+        width: 100%;
+    }
+
+    .deal-content h2 {
+        font-size: 45px;
+        line-height: 55px;
+    }
+
+    .footer-top {
+        grid-template-columns: 1fr 1fr;
     }
 }
 
-/* ================= MOBILE ================= */
-
-@media(max-width: 768px){
-
-    .navbar{
-        min-height: auto;
-
-        padding: 16px 5%;
-
-        flex-wrap: nowrap;
+/* ================= TABLET (992px) ================= */
+@media (max-width: 992px) {
+    .navbar {
+        height: 80px;
     }
 
-    .logo{
-        gap: 12px;
+    .nav-center {
+        display: none; /* Hide links for mobile menu toggle */
     }
 
-    .logo-box{
-        width: 44px;
-        height: 44px;
-
-        font-size: 22px;
-
-        border-radius: 14px;
-    }
-
-    .brand-text{
-        font-size: 23px;
-    }
-
-    /* HIDE DESKTOP NAV */
-
-    .nav-center{
-        display: none;
-    }
-
-    /* SHOW MOBILE BUTTON */
-
-    .menu-btn{
+    .menu-btn {
         display: flex;
-
-        width: 44px;
-        height: 44px;
-
-        border-radius: 12px;
-
-        flex-shrink: 0;
     }
 
-    .menu-btn i{
-        font-size: 18px;
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    /* MOBILE MENU */
+    .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
-    .mobile-menu{
-        display: none;
-
-        width: 100%;
-
-        background: #111827;
-
-        padding: 22px 5%;
-
+    .modal-box {
         flex-direction: column;
-
-        gap: 18px;
-
-        border-bottom: 1px solid rgba(255,255,255,0.08);
+        max-height: 90vh;
+        overflow-y: auto;
     }
 
-    .mobile-menu.active{
+    .modal-image, .modal-content {
+        width: 100%;
+    }
+
+    .modal-content {
+        padding: 30px;
+    }
+}
+
+/* ================= MOBILE (768px - IMPORTANT: 2 CARDS ROW) ================= */
+@media (max-width: 768px) {
+    
+    /* STABILIZE NAVBAR */
+    .navbar {
+        padding: 0 5%;
+        position: sticky;
+        z-index: 100; /* Stays below filter panel */
+    }
+
+    .logo-box {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+
+    .brand-text {
+        font-size: 20px;
+    }
+
+    .search-box {
+        display: none; /* Hidden on mobile header, use mobile bottom nav search */
+    }
+
+    /* PRODUCTS GRID 2-COLUMN */
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding: 10px 4%;
+    }
+
+    /* PRODUCT CARD BOX FIX */
+    .product-card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .product-image {
+        height: 180px; /* Uniform height */
+        background: #f5f5f5;
+    }
+
+    .product-info {
+        padding: 15px;
+    }
+
+    .product-info h3 {
+        font-size: 16px;
+    }
+
+    .product-info p {
+        display: none; /* Hide description on small mobile to save space */
+    }
+
+    /* FILTER PANEL SYSTEM */
+    .filter-panel {
+        width: 280px;
+        left: -320px;
+        z-index: 2000 !important; /* Above everything */
+    }
+
+    .filter-overlay {
+        z-index: 1500;
+    }
+
+    /* MOBILE BOTTOM NAV ENABLE */
+    .mobile-bottom-nav {
         display: flex;
     }
 
-    .mobile-menu a{
-        color: white;
+    .footer {
+        padding-bottom: 100px; /* Space for bottom nav */
+    }
+}
 
-        font-size: 16px;
-        font-weight: 500;
-
-        transition: 0.3s;
+/* ================= SMALL MOBILE (520px) ================= */
+@media (max-width: 520px) {
+    .hero-left h1 {
+        font-size: 40px;
+        line-height: 50px;
     }
 
-    .mobile-menu a:hover{
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .shop-btn, .explore-btn {
+        width: 100%;
+    }
+
+    .products-grid {
+        gap: 8px;
+    }
+
+    .product-image {
+        height: 150px;
+    }
+
+    .product-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .product-bottom a {
+        width: 100%;
+    }
+
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-box {
+        padding: 20px;
+    }
+
+    .about-text h2 {
+        font-size: 28px;
+    }
+}
+
+/* ================= EXTRA SMALL (380px) ================= */
+@media (max-width: 380px) {
+    .brand-text {
+        font-size: 17px;
+    }
+
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr); /* Strictly maintain 2 columns */
+        gap: 5px;
+    }
+
+    .product-info h3 {
+        font-size: 14px;
+    }
+
+    .product-bottom h4 {
+        font-size: 16px;
+    }
+}
+
+/* ================= PRODUCT CARD LOGIC (NO REDUCTION) ================= */
+.product-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 28px;
+    overflow: hidden;
+    transition: 0.35s;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f5f5;
+    overflow: hidden;
+}
+
+.product-image img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    padding: 5px;
+}
+
+.product-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-bottom {
+    margin-top: auto;
+}
+
+/* PLATFORM TAGS FIXED */
+.platform-tag {
+    pointer-events: none;
+    user-select: none;
+    z-index: 10;
+}
+/* =========================================================
+   OFFICIAL RESPONSIVE SYSTEM (FULL DEVICE SUPPORT)
+   ========================================================= */
+
+/* --- Fixes for Horizontal Scroll --- */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* ================= LARGE TABLETS / SMALL LAPTOPS (1200px) ================= */
+@media (max-width: 1200px) {
+    .hero-left h1 { font-size: 60px; line-height: 75px; }
+    .deal-banner { width: 92%; padding: 40px; }
+    .deal-content h2 { font-size: 50px; line-height: 60px; }
+    .category-grid { grid-template-columns: repeat(2, 1fr); }
+    .products-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ================= TABLET (992px) ================= */
+@media (max-width: 992px) {
+    .nav-center { gap: 20px; }
+    .brand-text { font-size: 24px; }
+    .hero { flex-direction: column; text-align: center; gap: 50px; }
+    .hero-left, .hero-right { width: 100%; }
+    .hero-buttons { justify-content: center; }
+    .hero-left p { margin: 25px auto; }
+    
+    .about-container { flex-direction: column; text-align: center; }
+    .about-image { order: -1; } /* Image on top for mobile/tablet */
+    
+    .modal-box { flex-direction: column; max-height: 90vh; overflow-y: auto; }
+    .modal-image, .modal-content { width: 100%; }
+    .modal-content { padding: 30px; }
+}
+
+/* ================= MOBILE OPTIMIZED (768px) ================= */
+@media (max-width: 768px) {
+    /* Navbar Tweaks */
+    .nav-center { display: none; } /* Links move to mobile menu */
+    .search-box { display: none; } /* Hide desktop search */
+    .menu-btn { display: flex; }
+    
+    .navbar { height: 80px; padding: 0 5%; }
+    
+    /* MOBILE MENU SEARCH - Add search inside mobile menu via JS or HTML */
+    .mobile-menu .search-box-mobile {
+        display: flex;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    /* Hero Section */
+    .hero-left h1 { font-size: 42px; line-height: 52px; }
+    .hero-right img { width: 320px; height: 320px; }
+
+    /* GRID SYSTEM: 2 CARDS PER ROW */
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding: 10px;
+    }
+
+    /* Product Card Visual Fixes */
+    .product-image { height: 160px; }
+    .product-info { padding: 15px; }
+    .product-info h3 { font-size: 16px; margin-bottom: 5px; }
+    .product-info p { display: none; } /* Hide desc on mobile for clean look */
+    .product-bottom h4 { font-size: 18px; }
+    .product-bottom a { width: 80px; height: 38px; font-size: 12px; }
+
+    /* Category Grid */
+    .category-grid { grid-template-columns: repeat(1, 1fr); gap: 20px; }
+
+    /* Deal Banner */
+    .deal-banner { flex-direction: column; text-align: center; }
+    .deal-image img { width: 280px; height: 280px; }
+    .deal-content h2 { font-size: 36px; line-height: 44px; }
+
+    /* Filter Panel Z-Index Fix */
+    .filter-panel {
+        width: 280px;
+        z-index: 2000;
+    }
+    .filter-overlay { z-index: 1999; }
+    
+    /* Footer */
+    .footer-top { grid-template-columns: 1fr; gap: 40px; }
+}
+
+/* ================= SMALL MOBILE (480px) ================= */
+@media (max-width: 480px) {
+    .brand-text { font-size: 18px; }
+    .logo-box { width: 38px; height: 38px; font-size: 18px; }
+    
+    .hero-left h1 { font-size: 32px; line-height: 40px; }
+    
+    /* Keep 2 columns but make them tighter */
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        padding: 5px;
+    }
+    
+    .product-image { height: 140px; }
+    
+    .product-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .product-bottom a { width: 100%; }
+    
+    .section-title h2 { font-size: 30px; }
+    
+    .admin-box { padding: 25px; }
+    .admin-box h2 { font-size: 28px; }
+}
+
+/* ================= EXTRA SMALL FIX (320px) ================= */
+@media (max-width: 320px) {
+    .products-grid {
+        grid-template-columns: 1fr; /* Switch to 1 column for very tiny phones */
+    }
+}
+
+/* ================= FUNCTIONAL UTILITIES ================= */
+
+/* Ensure images don't distort */
+.product-image img {
+    object-fit: contain !important;
+    width: 100%;
+    height: 100%;
+}
+
+/* Prevent Description from breaking card height */
+.product-info p {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Fix for Platform Tag Positioning on Mobile */
+@media (max-width: 768px) {
+    .platform-tag {
+        padding: 4px 10px;
+        font-size: 11px;
+        top: 10px;
+        left: 10px;
+    }
+}
+/* =========================================================
+   SEARCH SYSTEM RESPONSIVE FIXES
+   ========================================================= */
+
+/* --- Tablet/Small Laptop (992px) --- */
+@media (max-width: 992px) {
+    .search-box {
+        width: 220px; /* Shrink bar to save space for nav links */
+    }
+}
+
+/* --- Mobile (768px) --- */
+@media (max-width: 768px) {
+    /* 1. Hide the desktop search bar from the navbar to prevent overlapping */
+    .nav-right .search-box {
+        display: none; 
+    }
+
+    /* 2. Style for a search icon toggle (if you use one) or 
+       ensuring search looks good inside the mobile-menu */
+    .mobile-menu .search-box {
+        display: flex !important; /* Force search to show in mobile menu */
+        width: 100%;
+        margin-bottom: 15px;
+        background: rgba(255, 255, 255, 0.1);
+        height: 50px;
+    }
+
+    .search-box i {
+        font-size: 20px; /* Larger icon for thumb-tapping */
+    }
+
+    .search-box input {
+        font-size: 16px; /* Prevents iOS from zooming in on focus */
+    }
+}
+
+/* --- Mobile "Action Bar" (Below Header) --- */
+/* If you want the search bar to stay visible on the page but below the logo */
+@media (max-width: 520px) {
+    .product-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding: 0 5%;
+    }
+
+    .search-box {
+        width: 100% !important;
+        height: 45px;
+        border-radius: 12px;
+    }
+    
+    /* Ensure the search icon doesn't disappear */
+    .search-box i {
+        margin-right: 10px;
         color: #ff4d8d;
     }
 }
 
-/* ================= SMALL MOBILE ================= */
+/* =========================================================
+   FIX FOR THE "SEARCH ICON" ALIGNMENT
+   ========================================================= */
+.search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
 
-@media(max-width: 520px){
+.search-box i {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
 
-    .navbar{
-        padding: 14px 4%;
-    }
+.search-box i:active {
+    transform: scale(0.9); /* Visual feedback when tapped on mobile */
+}
+@media (max-width: 768px){
 
     .logo{
-        gap: 10px;
+        gap: 8px;
     }
 
-    .logo-box{
-        width: 40px;
-        height: 40px;
-
-        font-size: 20px;
-
-        border-radius: 12px;
+    .logo img{
+        width: 36px;
+        height: 36px;
     }
 
-    .brand-text{
-        font-size: 20px;
-    }
-
-    .menu-btn{
-        width: 40px;
-        height: 40px;
-    }
-
-    .menu-btn i{
-        font-size: 16px;
-    }
-
-    .mobile-menu{
-        padding: 20px 4%;
-    }
-
-    .mobile-menu a{
-        font-size: 15px;
+    .logo h2{
+        font-size: 18px;
     }
 }
 
-/* ================= EXTRA SMALL DEVICES ================= */
+@media (max-width: 520px){
 
-@media(max-width: 380px){
-
-    .brand-text{
-        font-size: 18px;
+    .logo img{
+        width: 32px;
+        height: 32px;
     }
 
-    .logo-box{
-        width: 38px;
-        height: 38px;
-
-        font-size: 18px;
-    }
-
-    .menu-btn{
-        width: 38px;
-        height: 38px;
+    .logo h2{
+        font-size: 16px;
     }
 }
