@@ -1,15 +1,31 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Contact Us - Firstline</title>
+  <meta charset="UTF-8" />
 
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="responsive.css">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>
+    Firstline Products
+  </title>
+
+  <!-- CSS -->
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="responsive.css" />
+  <link rel="stylesheet" href="products.css">
+
+  <!-- FONT AWESOME -->
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
 <meta charset="UTF-8">
 
 <meta
@@ -51,223 +67,234 @@
   property="og:image"
   content="YOUR_LOGO_OR_BANNER_LINK"
 >
-
-<style>
-
-/* ================= PAGE ================= */
-
-.contact-page{
-    width: 100%;
-    min-height: 100vh;
-    padding: 120px 8% 80px;
-    background: #0f172a;
-    color: white;
-}
-
-/* ================= CONTAINER ================= */
-
-.contact-container{
-    max-width: 1000px;
-    margin: auto;
-}
-
-/* ================= TITLE ================= */
-
-.contact-title{
-    margin-bottom: 50px;
-    text-align: center;
-}
-
-.contact-title h1{
-    font-size: 48px;
-    margin-bottom: 15px;
-}
-
-.contact-title p{
-    color: #94a3b8;
-    font-size: 16px;
-}
-
-/* ================= BOX ================= */
-
-.contact-box{
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 20px;
-    padding: 40px;
-    backdrop-filter: blur(10px);
-}
-
-/* ================= ITEM ================= */
-
-.contact-item{
-    margin-bottom: 35px;
-}
-
-.contact-item:last-child{
-    margin-bottom: 0;
-}
-
-.contact-item h2{
-    font-size: 24px;
-    margin-bottom: 10px;
-    color: #ff4d8d;
-}
-
-.contact-item p{
-    color: #d1d5db;
-    line-height: 30px;
-    font-size: 16px;
-}
-
-/* ================= LINK ================= */
-
-.contact-item a{
-    color: #ff4d8d;
-    text-decoration: none;
-    transition: 0.3s;
-}
-
-.contact-item a:hover{
-    text-decoration: underline;
-}
-
-/* ================= RESPONSIVE ================= */
-
-@media(max-width:768px){
-
-    .contact-page{
-        padding: 100px 5% 60px;
-    }
-
-    .contact-title h1{
-        font-size: 36px;
-    }
-
-    .contact-box{
-        padding: 30px;
-    }
-
-}
-
-@media(max-width:520px){
-
-    .contact-title h1{
-        font-size: 30px;
-    }
-
-    .contact-item h2{
-        font-size: 20px;
-    }
-
-    .contact-item p{
-        font-size: 14px;
-        line-height: 26px;
-    }
-
-    .contact-box{
-        padding: 22px;
-    }
-
-}
-
-</style>
-
 </head>
 
 <body>
 
-<!-- ================= PAGE ================= -->
+<!-- ================= NAVBAR ================= -->
 
-<section class="contact-page">
+<nav class="navbar">
 
-    <div class="contact-container">
+  <!-- FILTER BUTTON -->
+  <button class="open-filter-btn" onclick="openFilterPanel()">
+    ☰ Filters
+  </button>
 
-        <!-- TITLE -->
+  <!-- LOGO -->
+<div class="logo">
+    <img src="app_icon.ico" alt="">
+    <h2>Firstline</h2>
+</div>
 
-        <div class="contact-title">
 
-            <h1>Contact Us</h1>
+  <!-- SEARCH -->
+  <div class="search-box">
+    <i class="fa-solid fa-magnifying-glass"></i>
 
-            <p>
-                We'd love to hear from you.
-                Feel free to contact us anytime.
-            </p>
+    <input
+      type="text"
+      placeholder="Search products..."
+      id="searchInput"
+    />
+  </div>
 
+</nav>
+
+<!-- ================= FILTER PANEL ================= -->
+
+<div id="filterOverlay" class="filter-overlay" onclick="closeFilterPanel()"></div>
+
+<div id="filterPanel" class="filter-panel">
+
+  <!-- HEADER -->
+  <div class="filter-header">
+    <h3>Filters</h3>
+
+    <!-- CLOSE BUTTON -->
+    <button class="close-btn" onclick="closeFilterPanel()">✕</button>
+  </div>
+
+  <!-- CATEGORY -->
+  <div class="filter-section">
+    <h4>Category</h4>
+
+    <label><input type="checkbox" onchange="setCategory('All')"> All</label>
+    <label><input type="checkbox" onchange="setCategory('Fashion')"> Fashion</label>
+    <label><input type="checkbox" onchange="setCategory('Electronics')"> Electronics</label>
+    <label><input type="checkbox" onchange="setCategory('Accessories')"> Accessories</label>
+    <label><input type="checkbox" onchange="setCategory('Gaming')"> Gaming</label>
+    <label><input type="checkbox" onchange="setCategory('Beauty')"> Beauty</label>
+    <label><input type="checkbox" onchange="setCategory('Shoes')"> Shoes</label>
+
+  </div>
+
+  <!-- PLATFORM -->
+  <div class="filter-section">
+    <h4>Platform</h4>
+
+    <label><input type="checkbox" onchange="setPlatform('All')"> All</label>
+    <label><input type="checkbox" onchange="setPlatform('amazon')"> Amazon</label>
+    <label><input type="checkbox" onchange="setPlatform('flipkart')"> Flipkart</label>
+    <label><input type="checkbox" onchange="setPlatform('myntra')"> Myntra</label>
+    <label><input type="checkbox" onchange="setPlatform('meesho')"> Meesho</label>
+
+  </div>
+
+  <!-- PRICE RANGE (CUSTOM USER INPUT) -->
+  <div class="filter-section">
+    <h4>Price Range</h4>
+
+    <input type="number" id="minPrice" placeholder="Min Price">
+    <input type="number" id="maxPrice" placeholder="Max Price">
+
+    <button onclick="applyCustomPrice()">Apply</button>
+  </div>
+
+</div>
+
+    <!-- PRODUCTS GRID -->
+
+<div class="products-grid" id="productsGrid">
+
+</div>
+
+  </section>
+
+  <!-- JS -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyDH9OmFLoba7e8Sr6Vz5lruPiJtvznTQ2Y",
+  authDomain: "firstline-1927.firebaseapp.com",
+  projectId: "firstline-1927",
+  storageBucket: "firstline-1927.appspot.com",
+  messagingSenderId: "240292512608",
+  appId: "1:240292512608:web:1027ece3891e454def9405"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+const productsGrid = document.getElementById("productsGrid");
+
+// ================= STATE =================
+let allProducts = [];
+let selectedCategory = "All";
+let selectedPlatform = "All";
+let minPrice = 0;
+let maxPrice = Infinity;
+let searchText = "";
+
+// ================= FILTER PANEL OPEN/CLOSE =================
+function openFilterPanel() {
+  document.getElementById("filterPanel").classList.add("active");
+}
+
+function closeFilterPanel() {
+  document.getElementById("filterPanel").classList.remove("active");
+}
+
+// ================= LOAD =================
+function loadProducts() {
+
+  db.collection("products")
+    .orderBy("createdAt", "desc")
+    .onSnapshot(snapshot => {
+
+      allProducts = [];
+
+      snapshot.forEach(doc => {
+        allProducts.push(doc.data());
+      });
+
+      renderProducts();
+    });
+}
+
+// ================= RENDER =================
+function renderProducts() {
+
+  productsGrid.innerHTML = "";
+
+  const filtered = allProducts.filter(p => {
+
+    const priceValue = parseInt(p.price) || 0;
+
+    const categoryMatch =
+      selectedCategory === "All" ||
+      (p.category || "").toLowerCase() === selectedCategory.toLowerCase();
+
+    const platformMatch =
+      selectedPlatform === "All" ||
+      (p.platform || "").toLowerCase() === selectedPlatform.toLowerCase();
+
+    const priceMatch =
+      priceValue >= minPrice && priceValue <= maxPrice;
+
+    const searchMatch =
+      p.title.toLowerCase().includes(searchText.toLowerCase()) ||
+      p.desc.toLowerCase().includes(searchText.toLowerCase());
+
+    return categoryMatch && platformMatch && priceMatch && searchMatch;
+  });
+
+  filtered.forEach(product => {
+
+    productsGrid.innerHTML += `
+      <div class="product-card">
+
+        <div class="product-image">
+          <img src="${product.image}">
+          <div class="platform-tag ${product.platform}">
+            ${product.platform}
+          </div>
         </div>
 
-        <!-- CONTACT BOX -->
+        <div class="product-info">
+          <h3>${product.title}</h3>
+          <p>${product.desc}</p>
 
-        <div class="contact-box">
+          <div class="product-bottom">
+            <h4>₹${product.price}</h4>
 
-            <!-- EMAIL -->
-
-            <div class="contact-item">
-
-                <h2>Email Support</h2>
-
-                <p>
-                    For support, business inquiries,
-                    affiliate concerns, or website issues:
-                </p>
-
-                <p style="margin-top:10px;">
-
-                    <a href="mailto:remonislam1927@gmail.com">
-                        remonislam1927@gmail.com
-                    </a>
-
-                </p>
-
-            </div>
-
-            <!-- RESPONSE -->
-
-            <div class="contact-item">
-
-                <h2>Response Time</h2>
-
-                <p>
-                    We usually respond within
-                    24-48 hours depending on request volume.
-                </p>
-
-            </div>
-
-            <!-- BUSINESS -->
-
-            <div class="contact-item">
-
-                <h2>Business & Collaborations</h2>
-
-                <p>
-                    For partnerships, promotions,
-                    or collaboration opportunities,
-                    contact us through email.
-                </p>
-
-            </div>
-
-            <!-- SUPPORT -->
-
-            <div class="contact-item">
-
-                <h2>Customer Support</h2>
-
-                <p>
-                    Product purchases, refunds,
-                    shipping, and returns are handled
-                    directly by the respective third-party platforms
-                    such as Amazon, Flipkart, Myntra, and Meesho.
-                </p>
-
-            </div>
-
+            <a href="${product.link}" target="_blank">
+              Buy Now
+            </a>
+          </div>
         </div>
 
-    </div>
+      </div>
+    `;
+  });
+}
 
-</section>
+// ================= FILTER FUNCTIONS =================
+function setCategory(value) {
+  selectedCategory = value;
+  renderProducts();
+}
 
+function setPlatform(value) {
+  selectedPlatform = value;
+  renderProducts();
+}
+
+function applyCustomPrice() {
+  minPrice = parseInt(document.getElementById("minPrice").value) || 0;
+  maxPrice = parseInt(document.getElementById("maxPrice").value) || Infinity;
+  renderProducts();
+}
+
+// ================= SEARCH =================
+document.getElementById("searchInput").addEventListener("input", (e) => {
+  searchText = e.target.value;
+  renderProducts();
+});
+
+loadProducts();
+</script>
 </body>
+
 </html>
