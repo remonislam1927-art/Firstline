@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Contact Us - Firstline</title>
+<title>Affiliate Disclosure - Firstline</title>
 
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="responsive.css">
@@ -56,7 +55,7 @@
 
 /* ================= PAGE ================= */
 
-.contact-page{
+.disclosure-page{
     width: 100%;
     min-height: 100vh;
     padding: 120px 8% 80px;
@@ -66,69 +65,64 @@
 
 /* ================= CONTAINER ================= */
 
-.contact-container{
+.disclosure-container{
     max-width: 1000px;
     margin: auto;
 }
 
 /* ================= TITLE ================= */
 
-.contact-title{
+.disclosure-title{
     margin-bottom: 50px;
-    text-align: center;
 }
 
-.contact-title h1{
+.disclosure-title h1{
     font-size: 48px;
     margin-bottom: 15px;
 }
 
-.contact-title p{
+.disclosure-title p{
     color: #94a3b8;
     font-size: 16px;
 }
 
-/* ================= BOX ================= */
+/* ================= SECTION ================= */
 
-.contact-box{
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 20px;
-    padding: 40px;
-    backdrop-filter: blur(10px);
+.disclosure-section{
+    margin-bottom: 40px;
 }
 
-/* ================= ITEM ================= */
-
-.contact-item{
-    margin-bottom: 35px;
-}
-
-.contact-item:last-child{
-    margin-bottom: 0;
-}
-
-.contact-item h2{
-    font-size: 24px;
-    margin-bottom: 10px;
+.disclosure-section h2{
+    font-size: 28px;
+    margin-bottom: 15px;
     color: #ff4d8d;
 }
 
-.contact-item p{
+.disclosure-section p{
+    line-height: 32px;
     color: #d1d5db;
-    line-height: 30px;
     font-size: 16px;
 }
 
-/* ================= LINK ================= */
-
-.contact-item a{
-    color: #ff4d8d;
-    text-decoration: none;
-    transition: 0.3s;
+.disclosure-section ul{
+    padding-left: 20px;
+    margin-top: 15px;
 }
 
-.contact-item a:hover{
+.disclosure-section ul li{
+    margin-bottom: 12px;
+    color: #d1d5db;
+    line-height: 28px;
+}
+
+/* ================= EMAIL ================= */
+
+.disclosure-section a{
+    color: #ff4d8d;
+    text-decoration: none;
+}
+
+.disclosure-section a:hover{
     text-decoration: underline;
 }
 
@@ -136,37 +130,30 @@
 
 @media(max-width:768px){
 
-    .contact-page{
+    .disclosure-page{
         padding: 100px 5% 60px;
     }
 
-    .contact-title h1{
+    .disclosure-title h1{
         font-size: 36px;
     }
 
-    .contact-box{
-        padding: 30px;
+    .disclosure-section h2{
+        font-size: 24px;
     }
 
 }
 
 @media(max-width:520px){
 
-    .contact-title h1{
+    .disclosure-title h1{
         font-size: 30px;
     }
 
-    .contact-item h2{
-        font-size: 20px;
-    }
-
-    .contact-item p{
+    .disclosure-section p,
+    .disclosure-section ul li{
         font-size: 14px;
         line-height: 26px;
-    }
-
-    .contact-box{
-        padding: 22px;
     }
 
 }
@@ -179,89 +166,113 @@
 
 <!-- ================= PAGE ================= -->
 
-<section class="contact-page">
+<section class="disclosure-page">
 
-    <div class="contact-container">
+    <div class="disclosure-container">
 
         <!-- TITLE -->
 
-        <div class="contact-title">
+        <div class="disclosure-title">
 
-            <h1>Contact Us</h1>
+            <h1>Affiliate Disclosure</h1>
 
             <p>
-                We'd love to hear from you.
-                Feel free to contact us anytime.
+                Last Updated: May 14, 2026
             </p>
 
         </div>
 
-        <!-- CONTACT BOX -->
+        <!-- SECTION -->
 
-        <div class="contact-box">
+        <div class="disclosure-section">
 
-            <!-- EMAIL -->
+            <h2>Affiliate Partnerships</h2>
 
-            <div class="contact-item">
+            <p>
+                Firstline participates in affiliate marketing programs
+                with various online platforms including Amazon,
+                Flipkart, Myntra, and Meesho.
+            </p>
 
-                <h2>Email Support</h2>
+        </div>
 
-                <p>
-                    For support, business inquiries,
-                    affiliate concerns, or website issues:
-                </p>
+        <!-- SECTION -->
 
-                <p style="margin-top:10px;">
+        <div class="disclosure-section">
 
-                    <a href="mailto:remonislam1927@gmail.com">
-                        remonislam1927@gmail.com
-                    </a>
+            <h2>How Affiliate Links Work</h2>
 
-                </p>
+            <p>
+                Some product links on our website are affiliate links.
+                This means we may earn a small commission when you
+                purchase products through these links.
+            </p>
 
-            </div>
+            <p style="margin-top:15px;">
+                There is no extra cost to you when using these links.
+            </p>
 
-            <!-- RESPONSE -->
+        </div>
 
-            <div class="contact-item">
+        <!-- SECTION -->
 
-                <h2>Response Time</h2>
+        <div class="disclosure-section">
 
-                <p>
-                    We usually respond within
-                    24-48 hours depending on request volume.
-                </p>
+            <h2>Product Information</h2>
 
-            </div>
+            <p>
+                We try to provide accurate product details,
+                pricing, and availability. However, product
+                information may change on third-party websites
+                without notice.
+            </p>
 
-            <!-- BUSINESS -->
+        </div>
 
-            <div class="contact-item">
+        <!-- SECTION -->
 
-                <h2>Business & Collaborations</h2>
+        <div class="disclosure-section">
 
-                <p>
-                    For partnerships, promotions,
-                    or collaboration opportunities,
-                    contact us through email.
-                </p>
+            <h2>Third-Party Responsibility</h2>
 
-            </div>
+            <p>
+                Purchases, payments, shipping, returns,
+                and customer support are handled directly
+                by the respective third-party platform.
+            </p>
 
-            <!-- SUPPORT -->
+        </div>
 
-            <div class="contact-item">
+        <!-- SECTION -->
 
-                <h2>Customer Support</h2>
+        <div class="disclosure-section">
 
-                <p>
-                    Product purchases, refunds,
-                    shipping, and returns are handled
-                    directly by the respective third-party platforms
-                    such as Amazon, Flipkart, Myntra, and Meesho.
-                </p>
+            <h2>Transparency</h2>
 
-            </div>
+            <p>
+                Our goal is to recommend useful and quality products.
+                Affiliate partnerships do not influence our commitment
+                to providing honest recommendations.
+            </p>
+
+        </div>
+
+        <!-- SECTION -->
+
+        <div class="disclosure-section">
+
+            <h2>Contact Us</h2>
+
+            <p>
+                If you have questions regarding this disclosure,
+                you can contact us at:
+            </p>
+
+            <p style="margin-top:10px;">
+                <a href="mailto:remonislam1927@gmail.com">
+                    remonislam1927@gmail.com
+                </a>
+            </p>
 
         </div>
 
@@ -271,3 +282,4 @@
 
 </body>
 </html>
+
