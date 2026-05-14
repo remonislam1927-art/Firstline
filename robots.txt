@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://remonislam1927-art.github.io/Firstline/sitemap.xml

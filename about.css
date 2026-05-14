@@ -1,0 +1,49 @@
+/* ABOUT PAGE */
+
+.about-section {
+    padding: 80px 20px;
+    background: #0f0f0f;
+    min-height: 100vh;
+}
+
+.about-container {
+    max-width: 950px;
+    margin: auto;
+}
+
+.about-container h1 {
+    color: white;
+    font-size: 52px;
+    margin-bottom: 30px;
+}
+
+.about-container h2 {
+    color: white;
+    margin-top: 45px;
+    margin-bottom: 20px;
+    font-size: 32px;
+}
+
+.about-container p {
+    color: #d0d0d0;
+    line-height: 1.9;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.about-container ul {
+    padding-left: 20px;
+}
+
+.about-container li {
+    color: #e0e0e0;
+    margin-bottom: 12px;
+    font-size: 18px;
+}
+
+.about-banner {
+    width: 100%;
+    border-radius: 18px;
+    margin: 35px 0;
+    object-fit: cover;
+}
