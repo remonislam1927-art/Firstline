@@ -153,6 +153,13 @@
     <!-- PRODUCTS GRID -->
 
 <div class="products-grid" id="productsGrid">
+  <div class="load-more-wrapper">
+
+  <button id="loadMoreBtn">
+    Load More
+  </button>
+
+</div>
 
 </div>
 
@@ -181,11 +188,28 @@ const productsGrid = document.getElementById("productsGrid");
 
 // ================= STATE =================
 let allProducts = [];
+
 let selectedCategory = "All";
+
 let selectedPlatform = "All";
+
 let minPrice = 0;
+
 let maxPrice = Infinity;
+
 let searchText = "";
+
+// ================= NEW PAGINATION STATES =================
+
+let lastVisible = null;
+
+let loading = false;
+
+let reachedEnd = false;
+
+const PRODUCTS_LIMIT = 20;
+
+const loadedProductIds = new Set();
 
 // ================= FILTER PANEL OPEN/CLOSE =================
 function openFilterPanel() {
@@ -197,20 +221,104 @@ function closeFilterPanel() {
 }
 
 // ================= LOAD =================
-function loadProducts() {
+async function loadProducts(reset = false) {
 
-  db.collection("products")
-    .orderBy("createdAt", "desc")
-    .onSnapshot(snapshot => {
+  // ================= PREVENT MULTIPLE LOADS =================
+
+  if (loading || reachedEnd) return;
+
+  loading = true;
+
+  try {
+
+    // ================= RESET SYSTEM =================
+
+    if (reset) {
 
       allProducts = [];
 
-      snapshot.forEach(doc => {
-        allProducts.push(doc.data());
-      });
+      productsGrid.innerHTML = "";
 
-      renderProducts();
+      loadedProductIds.clear();
+
+      lastVisible = null;
+
+      reachedEnd = false;
+    }
+
+    // ================= BASE QUERY =================
+
+    let queryRef = db.collection("products")
+      .orderBy("createdAt", "desc")
+      .limit(PRODUCTS_LIMIT);
+
+    // ================= CATEGORY FILTER =================
+
+    if (selectedCategory !== "All") {
+
+      queryRef = db.collection("products")
+        .where("category", "==", selectedCategory)
+        .orderBy("createdAt", "desc")
+        .limit(PRODUCTS_LIMIT);
+    }
+
+    // ================= PAGINATION =================
+
+    if (lastVisible) {
+
+      queryRef = queryRef.startAfter(lastVisible);
+    }
+
+    // ================= FETCH DATA =================
+
+    const snapshot = await queryRef.get();
+
+    // ================= NO MORE PRODUCTS =================
+
+    if (snapshot.empty) {
+
+      reachedEnd = true;
+
+      const loadBtn = document.getElementById("loadMoreBtn");
+
+      if (loadBtn) {
+        loadBtn.style.display = "none";
+      }
+
+      return;
+    }
+
+    // ================= SAVE LAST DOC =================
+
+    lastVisible = snapshot.docs[snapshot.docs.length - 1];
+
+    // ================= PREVENT DUPLICATES =================
+
+    snapshot.forEach(doc => {
+
+      if (!loadedProductIds.has(doc.id)) {
+
+        loadedProductIds.add(doc.id);
+
+        allProducts.push({
+          id: doc.id,
+          ...doc.data()
+        });
+      }
     });
+
+    // ================= RENDER =================
+
+    renderProducts();
+
+  } catch (error) {
+
+    console.error("Error loading products:", error);
+
+  } finally {
+
+    loading = false;
+  }
 }
 
 // ================= RENDER =================
@@ -326,12 +434,29 @@ function applyCustomPrice() {
 }
 
 // ================= SEARCH =================
-document.getElementById("searchInput").addEventListener("input", (e) => {
-  searchText = e.target.value;
-  renderProducts();
-});
+document.getElementById("searchInput")
+.addEventListener("input", async (e) => {
 
+  searchText = e.target.value.trim();
+
+  productsGrid.innerHTML = "";
+
+  allProducts = [];
+
+  loadedProductIds.clear();
+
+  lastVisible = null;
+
+  reachedEnd = false;
+
+  await loadProducts(true);
+});
 loadProducts();
+document.getElementById("loadMoreBtn")
+.addEventListener("click", () => {
+
+  loadProducts();
+});
 </script>
 </body>
 
