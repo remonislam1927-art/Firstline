@@ -2,25 +2,14 @@
 <html lang="en">
 
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta charset="UTF-8" />
+<title>Affiliate Disclosure - Firstline</title>
 
-  <title>
-    Firstline Products
-  </title>
-
-  <!-- CSS -->
-
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="responsive.css" />
-  <link rel="stylesheet" href="products.css">
-
-  <!-- FONT AWESOME -->
-
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-  />
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="responsive.css">
+<link rel="icon" type="image/x-icon" href="app_icon.ico">
 <meta charset="UTF-8">
 
 <meta
@@ -62,277 +51,236 @@
   property="og:image"
   content="YOUR_LOGO_OR_BANNER_LINK"
 >
-<link rel="icon" type="image/x-icon" href="app_icon.ico">
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
+
+<style>
+
+/* ================= PAGE ================= */
+
+.disclosure-page{
+    width: 100%;
+    min-height: 100vh;
+    padding: 120px 8% 80px;
+    background: #0f172a;
+    color: white;
+}
+
+/* ================= CONTAINER ================= */
+
+.disclosure-container{
+    max-width: 1000px;
+    margin: auto;
+}
+
+/* ================= TITLE ================= */
+
+.disclosure-title{
+    margin-bottom: 50px;
+}
+
+.disclosure-title h1{
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.disclosure-title p{
+    color: #94a3b8;
+    font-size: 16px;
+}
+
+/* ================= SECTION ================= */
+
+.disclosure-section{
+    margin-bottom: 40px;
+}
+
+.disclosure-section h2{
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #ff4d8d;
+}
+
+.disclosure-section p{
+    line-height: 32px;
+    color: #d1d5db;
+    font-size: 16px;
+}
+
+.disclosure-section ul{
+    padding-left: 20px;
+    margin-top: 15px;
+}
+
+.disclosure-section ul li{
+    margin-bottom: 12px;
+    color: #d1d5db;
+    line-height: 28px;
+}
+
+/* ================= EMAIL ================= */
+
+.disclosure-section a{
+    color: #ff4d8d;
+    text-decoration: none;
+}
+
+.disclosure-section a:hover{
+    text-decoration: underline;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:768px){
+
+    .disclosure-page{
+        padding: 100px 5% 60px;
+    }
+
+    .disclosure-title h1{
+        font-size: 36px;
+    }
+
+    .disclosure-section h2{
+        font-size: 24px;
+    }
+
+}
+
+@media(max-width:520px){
+
+    .disclosure-title h1{
+        font-size: 30px;
+    }
+
+    .disclosure-section p,
+    .disclosure-section ul li{
+        font-size: 14px;
+        line-height: 26px;
+    }
+
+}
+
+</style>
+
 </head>
 
 <body>
 
-<!-- ================= NAVBAR ================= -->
+<!-- ================= PAGE ================= -->
 
-<nav class="navbar">
+<section class="disclosure-page">
 
-  <!-- FILTER BUTTON -->
-  <button class="open-filter-btn" onclick="openFilterPanel()">
-    ☰ Filters
-  </button>
+    <div class="disclosure-container">
 
-  <!-- LOGO -->
-<div class="logo">
-    <img src="app_icon.ico" alt="">
-    <h2>Firstline</h2>
-</div>
+        <!-- TITLE -->
 
+        <div class="disclosure-title">
 
-  <!-- SEARCH -->
-  <div class="search-box">
-    <i class="fa-solid fa-magnifying-glass"></i>
+            <h1>Affiliate Disclosure</h1>
 
-    <input
-      type="text"
-      placeholder="Search products..."
-      id="searchInput"
-    />
-  </div>
+            <p>
+                Last Updated: May 14, 2026
+            </p>
 
-</nav>
-
-<!-- ================= FILTER PANEL ================= -->
-
-<div id="filterOverlay" class="filter-overlay" onclick="closeFilterPanel()"></div>
-
-<div id="filterPanel" class="filter-panel">
-
-  <!-- HEADER -->
-  <div class="filter-header">
-    <h3>Filters</h3>
-
-    <!-- CLOSE BUTTON -->
-    <button class="close-btn" onclick="closeFilterPanel()">✕</button>
-  </div>
-
-  <!-- CATEGORY -->
-  <div class="filter-section">
-    <h4>Category</h4>
-
-    <label><input type="checkbox" onchange="setCategory('All')"> All</label>
-    <label><input type="checkbox" onchange="setCategory('Fashion')"> Fashion</label>
-    <label><input type="checkbox" onchange="setCategory('Electronics')"> Electronics</label>
-    <label><input type="checkbox" onchange="setCategory('Accessories')"> Accessories</label>
-    <label><input type="checkbox" onchange="setCategory('Gaming')"> Gaming</label>
-    <label><input type="checkbox" onchange="setCategory('Beauty')"> Beauty</label>
-    <label><input type="checkbox" onchange="setCategory('Shoes')"> Shoes</label>
-
-  </div>
-
-  <!-- PLATFORM -->
-  <div class="filter-section">
-    <h4>Platform</h4>
-
-    <label><input type="checkbox" onchange="setPlatform('All')"> All</label>
-    <label><input type="checkbox" onchange="setPlatform('amazon')"> Amazon</label>
-    <label><input type="checkbox" onchange="setPlatform('flipkart')"> Flipkart</label>
-    <label><input type="checkbox" onchange="setPlatform('myntra')"> Myntra</label>
-    <label><input type="checkbox" onchange="setPlatform('meesho')"> Meesho</label>
-
-  </div>
-
-  <!-- PRICE RANGE (CUSTOM USER INPUT) -->
-  <div class="filter-section">
-    <h4>Price Range</h4>
-
-    <input type="number" id="minPrice" placeholder="Min Price">
-    <input type="number" id="maxPrice" placeholder="Max Price">
-
-    <button onclick="applyCustomPrice()">Apply</button>
-  </div>
-
-</div>
-<marquee><h2>Search for the products you want</h2></marquee>
-
-    <!-- PRODUCTS GRID -->
-
-<div class="products-grid" id="productsGrid">
-
-</div>
-
-  </section>
-
-  <!-- JS -->
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
-
-<script>
-const firebaseConfig = {
-  apiKey: "AIzaSyDH9OmFLoba7e8Sr6Vz5lruPiJtvznTQ2Y",
-  authDomain: "firstline-1927.firebaseapp.com",
-  projectId: "firstline-1927",
-  storageBucket: "firstline-1927.appspot.com",
-  messagingSenderId: "240292512608",
-  appId: "1:240292512608:web:1027ece3891e454def9405"
-};
-
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-
-const productsGrid = document.getElementById("productsGrid");
-
-// ================= STATE =================
-let allProducts = [];
-let selectedCategory = "All";
-let selectedPlatform = "All";
-let minPrice = 0;
-let maxPrice = Infinity;
-let searchText = "";
-
-// ================= FILTER PANEL OPEN/CLOSE =================
-function openFilterPanel() {
-  document.getElementById("filterPanel").classList.add("active");
-}
-
-function closeFilterPanel() {
-  document.getElementById("filterPanel").classList.remove("active");
-}
-
-// ================= LOAD =================
-function loadProducts() {
-
-  db.collection("products")
-    .orderBy("createdAt", "desc")
-    .onSnapshot(snapshot => {
-
-      allProducts = [];
-
-      snapshot.forEach(doc => {
-        allProducts.push(doc.data());
-      });
-
-      renderProducts();
-    });
-}
-
-// ================= RENDER =================
-function renderProducts() {
-
-  productsGrid.innerHTML = "";
-
-  // ================= FUSE SEARCH =================
-
-  const options = {
-    keys: [
-      "title",
-      "desc",
-      "category",
-      "platform"
-    ],
-    threshold: 0.4,
-    includeScore: true
-  };
-
-  const fuse = new Fuse(allProducts, options);
-
-  const searchedProducts = searchText
-    ? fuse.search(searchText).map(result => result.item)
-    : allProducts;
-
-  // ================= FILTER =================
-
-  const filtered = searchedProducts.filter(p => {
-
-    const priceValue = parseInt(p.price) || 0;
-
-    const categoryMatch =
-      selectedCategory === "All" ||
-      (p.category || "").toLowerCase() === selectedCategory.toLowerCase();
-
-    const platformMatch =
-      selectedPlatform === "All" ||
-      (p.platform || "").toLowerCase() === selectedPlatform.toLowerCase();
-
-    const priceMatch =
-      priceValue >= minPrice && priceValue <= maxPrice;
-
-    return categoryMatch && platformMatch && priceMatch;
-  });
-
-  // ================= EMPTY STATE =================
-
-  if (filtered.length === 0) {
-
-    productsGrid.innerHTML = `
-      <div class="no-products-found">
-        <h2>No Products Found</h2>
-        <p>Try searching something else.</p>
-      </div>
-    `;
-
-    return;
-  }
-
-  // ================= PRODUCTS =================
-
-  filtered.forEach(product => {
-
-    productsGrid.innerHTML += `
-      <div class="product-card">
-
-        <div class="product-image">
-          <img src="${product.image}" loading="lazy">
-
-          <div class="platform-tag ${product.platform}">
-            ${product.platform}
-          </div>
         </div>
 
-        <div class="product-info">
-          <h3>${product.title}</h3>
-          <p>${product.desc}</p>
+        <!-- SECTION -->
 
-          <div class="product-bottom">
-            <h4>₹${product.price}</h4>
+        <div class="disclosure-section">
 
-            <a 
-              href="${product.link}" 
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Buy Now
-            </a>
-          </div>
+            <h2>Affiliate Partnerships</h2>
+
+            <p>
+                Firstline participates in affiliate marketing programs
+                with various online platforms including Amazon,
+                Flipkart, Myntra, and Meesho.
+            </p>
+
         </div>
 
-      </div>
-    `;
-  });
-}
+        <!-- SECTION -->
 
-// ================= FILTER FUNCTIONS =================
-function setCategory(value) {
-  selectedCategory = value;
-  renderProducts();
-}
+        <div class="disclosure-section">
 
-function setPlatform(value) {
-  selectedPlatform = value;
-  renderProducts();
-}
+            <h2>How Affiliate Links Work</h2>
 
-function applyCustomPrice() {
-  minPrice = parseInt(document.getElementById("minPrice").value) || 0;
-  maxPrice = parseInt(document.getElementById("maxPrice").value) || Infinity;
-  renderProducts();
-}
+            <p>
+                Some product links on our website are affiliate links.
+                This means we may earn a small commission when you
+                purchase products through these links.
+            </p>
 
-// ================= SEARCH =================
-document.getElementById("searchInput").addEventListener("input", (e) => {
-  searchText = e.target.value;
-  renderProducts();
-});
+            <p style="margin-top:15px;">
+                There is no extra cost to you when using these links.
+            </p>
 
-loadProducts();
-</script>
+        </div>
+
+        <!-- SECTION -->
+
+        <div class="disclosure-section">
+
+            <h2>Product Information</h2>
+
+            <p>
+                We try to provide accurate product details,
+                pricing, and availability. However, product
+                information may change on third-party websites
+                without notice.
+            </p>
+
+        </div>
+
+        <!-- SECTION -->
+
+        <div class="disclosure-section">
+
+            <h2>Third-Party Responsibility</h2>
+
+            <p>
+                Purchases, payments, shipping, returns,
+                and customer support are handled directly
+                by the respective third-party platform.
+            </p>
+
+        </div>
+
+        <!-- SECTION -->
+
+        <div class="disclosure-section">
+
+            <h2>Transparency</h2>
+
+            <p>
+                Our goal is to recommend useful and quality products.
+                Affiliate partnerships do not influence our commitment
+                to providing honest recommendations.
+            </p>
+
+        </div>
+
+        <!-- SECTION -->
+
+        <div class="disclosure-section">
+
+            <h2>Contact Us</h2>
+
+            <p>
+                If you have questions regarding this disclosure,
+                you can contact us at:
+            </p>
+
+            <p style="margin-top:10px;">
+                <a href="mailto:remonislam1927@gmail.com">
+                    remonislam1927@gmail.com
+                </a>
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
 </body>
-
 </html>
+
