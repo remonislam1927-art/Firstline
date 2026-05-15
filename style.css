@@ -824,3 +824,23 @@ body{
     border-radius: 16px;
     margin-bottom: 30px;
 }
+.load-more-wrapper{
+display:flex;
+justify-content:center;
+padding:40px 20px;
+}
+
+#loadMoreBtn{
+padding:14px 28px;
+border:none;
+border-radius:14px;
+background:#000;
+color:#fff;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
+}
+
+#loadMoreBtn:hover{
+transform:translateY(-3px);
+}
