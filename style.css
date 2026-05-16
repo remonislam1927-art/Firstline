@@ -844,3 +844,197 @@ transition:0.3s;
 #loadMoreBtn:hover{
 transform:translateY(-3px);
 }
+/* =========================
+   ADMIN DROPDOWN STYLING
+   (CATEGORY + PLATFORM)
+========================= */
+
+.admin-box select {
+    width: 100%;
+    padding: 12px 14px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #2d3748;
+    background: #0f172a;
+    color: #ffffff;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+/* Hover & focus effect */
+.admin-box select:hover,
+.admin-box select:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+}
+
+/* Style optgroup headings */
+.admin-box select optgroup {
+    font-style: normal;
+    font-weight: 600;
+    color: #94a3b8;
+    background: #111827;
+}
+
+/* Style options */
+.admin-box select option {
+    background: #0b1220;
+    color: #e2e8f0;
+    padding: 8px;
+}
+
+/* Better spacing for form layout */
+.admin-box input,
+.admin-box textarea {
+    width: 100%;
+    padding: 12px 14px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #2d3748;
+    background: #0f172a;
+    color: white;
+    font-size: 14px;
+}
+
+/* Focus effect for inputs */
+.admin-box input:focus,
+.admin-box textarea:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+    outline: none;
+}
+
+/* Button styling consistency */
+.admin-box button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background: #38bdf8;
+    border: none;
+    border-radius: 8px;
+    color: #0f172a;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.admin-box button:hover {
+    background: #0ea5e9;
+}
+/* ================= PLATFORM SEARCH DROPDOWN ================= */
+
+.dropdown-wrapper {
+    position: relative;
+    width: 100%;
+    margin: 10px 0;
+}
+
+#platformSearchInput {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid #2d3748;
+    background: #0f172a;
+    color: #fff;
+    outline: none;
+}
+
+#platformSearchInput:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+}
+
+/* dropdown box */
+.dropdown-list {
+    position: absolute;
+    width: 100%;
+    max-height: 220px;
+    overflow-y: auto;
+    background: #0b1220;
+    border: 1px solid #2d3748;
+    border-radius: 8px;
+    margin-top: 5px;
+    display: none;
+    z-index: 999;
+}
+
+/* dropdown item */
+.dropdown-item {
+    padding: 10px;
+    cursor: pointer;
+    color: #e2e8f0;
+    transition: 0.2s;
+}
+
+.dropdown-item:hover {
+    background: #1e293b;
+}
+.dropdown-wrapper{
+    position: relative;
+    width: 100%;
+}
+
+#platformSearchInput{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.dropdown-list{
+    position: absolute;
+    width: 100%;
+    background: white;
+    border: 1px solid #ddd;
+    border-top: none;
+    max-height: 220px;   /* ⭐ THIS makes scroll */
+    overflow-y: auto;    /* ⭐ SCROLL ENABLED */
+    z-index: 999;
+}
+
+.dropdown-list div{
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dropdown-list div:hover{
+    background: #f2f2f2;
+}
+.platform-stats-box {
+  background: #111827;
+  color: white;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.platform-stats-box h3 {
+  margin-bottom: 12px;
+}
+
+.platform-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.platform-stat-card {
+  background: #1f2937;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.platform-stat-card h4 {
+  font-size: 13px;
+  color: #9ca3af;
+  margin: 0;
+}
+
+.platform-stat-card p {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 5px 0 0;
+}
