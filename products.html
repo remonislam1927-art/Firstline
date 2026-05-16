@@ -270,16 +270,16 @@ async function loadProducts(reset = false) {
       reachedEnd = false;
     }
 
-    let queryRef = db.collection("products")
-      .orderBy("createdAt", "desc")
-      .limit(PRODUCTS_LIMIT);
+    let baseQuery = db.collection("products")
+      .orderBy("createdAt", "desc");
 
     if (selectedCategory !== "All") {
-      queryRef = db.collection("products")
+      baseQuery = db.collection("products")
         .where("category", "==", selectedCategory)
-        .orderBy("createdAt", "desc")
-        .limit(PRODUCTS_LIMIT);
+        .orderBy("createdAt", "desc");
     }
+
+    let queryRef = baseQuery.limit(PRODUCTS_LIMIT);
 
     if (lastVisible) {
       queryRef = queryRef.startAfter(lastVisible);
