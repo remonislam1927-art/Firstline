@@ -38,7 +38,6 @@ z-index:9999;
 </div>
 
 <section class="admin-panel" id="adminPanel" style="display:none;">
-
     <div class="admin-container">
 
         <!-- FORM -->
@@ -56,19 +55,57 @@ z-index:9999;
 
             <textarea id="productDesc" placeholder="Description"></textarea>
 
-            <select id="productPlatform">
-                <option value="amazon">Amazon</option>
-                <option value="flipkart">Flipkart</option>
-                <option value="myntra">Myntra</option>
-                <option value="meesho">Meesho</option>
-            </select>
-            <select id="productCategory">
+            <!-- PLATFORM (DYNAMIC GROUPED) -->
+<select id="productPlatform">
+
+    <optgroup label="🛍️ Shopping Platforms">
+        <option value="Amazon">Amazon</option>
+        <option value="Flipkart">Flipkart</option>
+        <option value="Myntra">Myntra</option>
+        <option value="Ajio">Ajio</option>
+        <option value="Nykaa">Nykaa</option>
+    </optgroup>
+
+    <optgroup label="✈️ Travel & Booking">
+        <option value="MakeMyTrip">MakeMyTrip</option>
+        <option value="Goibibo">Goibibo</option>
+        <option value="Booking.com">Booking.com</option>
+        <option value="Agoda">Agoda</option>
+        <option value="Cleartrip">Cleartrip</option>
+    </optgroup>
+
+    <optgroup label="💳 Finance & Banking">
+        <option value="HDFC Bank">HDFC Bank</option>
+        <option value="SBI Card">SBI Card</option>
+        <option value="Axis Bank">Axis Bank</option>
+        <option value="IDFC FIRST Bank">IDFC FIRST Bank</option>
+        <option value="Bajaj Finserv">Bajaj Finserv</option>
+    </optgroup>
+
+    <optgroup label="💻 Software & Services">
+        <option value="GoDaddy">GoDaddy</option>
+        <option value="Hostinger">Hostinger</option>
+        <option value="Google Workspace">Google Workspace</option>
+        <option value="Canva">Canva</option>
+        <option value="Udemy">Udemy</option>
+    </optgroup>
+
+</select>
+            <!-- CATEGORY -->
+<select id="productCategory" onchange="updatePlatforms()">
+    <option value="All">All</option>
     <option value="Fashion">Fashion</option>
     <option value="Electronics">Electronics</option>
     <option value="Accessories">Accessories</option>
     <option value="Gaming">Gaming</option>
     <option value="Beauty">Beauty</option>
     <option value="Shoes">Shoes</option>
+    <option value="Books">Books</option>
+    <option value="Health">Health</option>
+    <option value="Home & Kitchen">Home & Kitchen</option>
+    <option value="Services">Services</option>
+    <option value="Finance">Finance</option>
+    <option value="Travel">Travel</option>
 </select>
 
             <button onclick="addProduct()">Save Product</button>
@@ -81,9 +118,10 @@ z-index:9999;
     </div>
 
 </section>
+
 <button onclick="logout()" class="logout-btn">Logout</button>
-<script src="admin.js">
-</script>
+
+<script src="admin.js"></script>
 
 <script>
     
@@ -108,7 +146,78 @@ const auth = firebase.auth();
 let editId = null;
 let uploadedImage = "";
 
-// ================= SECURE GUARD (IMPORTANT) =================
+// ================= PLATFORM GROUPS (NEW ADDITION) =================
+const platformGroups = {
+  "Shopping": [
+    "Amazon",
+    "Flipkart",
+    "Myntra",
+    "Ajio",
+    "Nykaa"
+  ],
+
+  "Travel": [
+    "MakeMyTrip",
+    "Goibibo",
+    "Booking.com",
+    "Agoda",
+    "Cleartrip"
+  ],
+
+  "Finance": [
+    "HDFC Bank",
+    "SBI Card",
+    "Axis Bank",
+    "IDFC FIRST Bank",
+    "Bajaj Finserv"
+  ],
+
+  "Services": [
+    "GoDaddy",
+    "Hostinger",
+    "Google Workspace",
+    "Canva",
+    "Udemy"
+  ]
+};
+function filterPlatforms() {
+
+    const inputEl = document.getElementById("platformSearchInput");
+    const dropdown = document.getElementById("platformDropdown");
+
+    if (!inputEl || !dropdown) return; // ⭐ SAFE FIX
+
+    const input = inputEl.value.toLowerCase();
+    const category = document.getElementById("productCategory").value;
+
+    let group = "Shopping";
+
+    if (category === "Travel") group = "Travel";
+    else if (category === "Finance") group = "Finance";
+    else if (category === "Services") group = "Services";
+
+    const platforms = platformGroups[group];
+
+    dropdown.innerHTML = "";
+
+    platforms
+        .filter(p => p.toLowerCase().includes(input))
+        .forEach(p => {
+
+            const div = document.createElement("div");
+            div.innerText = p;
+
+            div.onclick = () => {
+                document.getElementById("productPlatform").value = p;
+                document.getElementById("platformSearchInput").value = p;
+                dropdown.innerHTML = "";
+            };
+
+            dropdown.appendChild(div);
+        });
+}
+
+// ================= SECURE GUARD =================
 auth.onAuthStateChanged(user => {
 
     if (!user) {
@@ -127,6 +236,7 @@ auth.onAuthStateChanged(user => {
     document.getElementById("adminPanel").style.display = "block";
 
     loadProducts();
+    updatePlatforms(); // ⭐ AUTO LOAD FIRST TIME
 });
 
 // ================= IMAGE UPLOAD =================
@@ -149,9 +259,10 @@ function loadProducts(){
 
     const container = document.getElementById("adminProducts");
 
-    db.collection("products")
-    .orderBy("createdAt","desc")
-    .onSnapshot(snapshot => {
+db.collection("products")
+.orderBy("createdAt","desc")
+.limit(5)
+.onSnapshot(snapshot => {
 
         container.innerHTML = "";
 
@@ -183,6 +294,13 @@ function loadProducts(){
     });
 }
 
+// ================= ⭐ DYNAMIC PLATFORM SYSTEM (NEW) =================
+function updatePlatforms() {
+    // NO NEED TO CHANGE DOM
+    // because optgroups already exist in HTML
+    return;
+}
+
 // ================= ADD / UPDATE =================
 function addProduct(){
 
@@ -191,7 +309,7 @@ function addProduct(){
     const imageUrl = productImage.value.trim();
     const link = productLink.value.trim();
     const desc = productDesc.value.trim();
-    const platform = productPlatform.value;
+    const platform = document.getElementById("productPlatform").value;
 
     if(!title || !price || !link){
         alert("Fill required fields");
@@ -231,10 +349,16 @@ function editProduct(id){
         productImage.value = p.image;
         productLink.value = p.link;
         productDesc.value = p.desc;
-        productPlatform.value = p.platform;
+
         productCategory.value = p.category || "Fashion";
+
         uploadedImage = p.image;
         editId = id;
+
+        updatePlatforms(); // ⭐ IMPORTANT FIX
+        setTimeout(() => {
+            productPlatform.value = p.platform;
+        }, 50);
     });
 }
 
@@ -254,8 +378,35 @@ function clearFields(){
 
     uploadedImage = "";
     editId = null;
+
+    productCategory.value = "Fashion";
+    updatePlatforms();
+}
+function updatePlatformStats(products) {
+
+    const counts = {};
+
+    products.forEach(p => {
+        const platform = p.platform || "Unknown";
+        counts[platform] = (counts[platform] || 0) + 1;
+    });
+
+    const container = document.getElementById("platformStats");
+    container.innerHTML = "";
+
+    Object.keys(counts).forEach(platform => {
+
+        const card = document.createElement("div");
+        card.className = "platform-stat-card";
+
+        card.innerHTML = `
+            <h4>${platform}</h4>
+            <p>${counts[platform]}</p>
+        `;
+
+        container.appendChild(card);
+    });
 }
 </script>
-
 </body>
 </html>
