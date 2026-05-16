@@ -253,7 +253,17 @@ function closeFilterPanel() {
   document.getElementById("filterPanel").classList.remove("active");
 }
 
-// ================= LOAD PRODUCTS (BROWSE MODE ONLY) =================
+// ================= FIX: PLATFORM CLASS CLEANER (IMPORTANT) =================
+function getPlatformClass(platform) {
+  if (!platform) return "tag-default";
+
+  return "tag-" + platform
+    .toLowerCase()
+    .replace(/\s+/g, "")
+    .replace(/\./g, "");
+}
+
+// ================= LOAD PRODUCTS =================
 async function loadProducts(reset = false) {
 
   if (loading || reachedEnd || mode === "search") return;
@@ -362,7 +372,7 @@ function renderProducts() {
     div.innerHTML = `
       <div class="product-image">
         <img src="${product.image}" loading="lazy">
-        <div class="platform-tag ${product.platform}">
+        <div class="platform-tag ${getPlatformClass(product.platform)}">
           ${product.platform}
         </div>
       </div>
@@ -384,7 +394,7 @@ function renderProducts() {
   productsGrid.appendChild(fragment);
 }
 
-// ================= FULL DATABASE SEARCH ENGINE =================
+// ================= SEARCH ENGINE =================
 async function initSearchEngine() {
 
   const snapshot = await db.collection("products")
@@ -403,7 +413,7 @@ async function initSearchEngine() {
   });
 }
 
-// ================= SEARCH INPUT (0.1s FEEL FAST) =================
+// ================= SEARCH INPUT =================
 document.getElementById("searchInput")
 .addEventListener("input", (e) => {
 
@@ -417,7 +427,6 @@ document.getElementById("searchInput")
 
     if (!fuseIndex) return;
 
-    // SWITCH MODE
     mode = value.length > 0 ? "search" : "browse";
     searchPage = 0;
 
@@ -433,7 +442,7 @@ document.getElementById("searchInput")
       loadProducts(true);
     }
 
-  }, 80); // ⚡ faster than Amazon feel
+  }, 80);
 });
 
 // ================= SEARCH RENDER =================
@@ -454,7 +463,7 @@ function renderSearchResults() {
     div.innerHTML = `
       <div class="product-image">
         <img src="${product.image}" loading="lazy">
-        <div class="platform-tag ${product.platform}">
+        <div class="platform-tag ${getPlatformClass(product.platform)}">
           ${product.platform}
         </div>
       </div>
@@ -479,7 +488,7 @@ function renderSearchResults() {
     end >= searchResults.length ? "none" : "block";
 }
 
-// ================= FILTER FUNCTIONS =================
+// ================= FILTER =================
 function setCategory(value) {
   selectedCategory = value;
   renderProducts();
@@ -501,9 +510,7 @@ loadBtn.addEventListener("click", () => {
 
   if (mode === "browse") {
     loadProducts();
-  }
-
-  else if (mode === "search") {
+  } else {
     searchPage++;
     renderSearchResults();
   }
