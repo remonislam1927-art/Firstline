@@ -111,31 +111,62 @@
     <button class="close-btn" onclick="closeFilterPanel()">✕</button>
   </div>
 
-  <!-- CATEGORY -->
-  <div class="filter-section">
-    <h4>Category</h4>
+<!-- CATEGORY -->
+<div class="filter-section">
+  <h4>Category</h4>
 
-    <label><input type="checkbox" onchange="setCategory('All')"> All</label>
-    <label><input type="checkbox" onchange="setCategory('Fashion')"> Fashion</label>
-    <label><input type="checkbox" onchange="setCategory('Electronics')"> Electronics</label>
-    <label><input type="checkbox" onchange="setCategory('Accessories')"> Accessories</label>
-    <label><input type="checkbox" onchange="setCategory('Gaming')"> Gaming</label>
-    <label><input type="checkbox" onchange="setCategory('Beauty')"> Beauty</label>
-    <label><input type="checkbox" onchange="setCategory('Shoes')"> Shoes</label>
+  <label><input type="checkbox" onchange="setCategory('All')"> All</label>
+  <label><input type="checkbox" onchange="setCategory('Fashion')"> Fashion</label>
+  <label><input type="checkbox" onchange="setCategory('Electronics')"> Electronics</label>
+  <label><input type="checkbox" onchange="setCategory('Accessories')"> Accessories</label>
+  <label><input type="checkbox" onchange="setCategory('Gaming')"> Gaming</label>
+  <label><input type="checkbox" onchange="setCategory('Beauty')"> Beauty</label>
+  <label><input type="checkbox" onchange="setCategory('Shoes')"> Shoes</label>
+  <label><input type="checkbox" onchange="setCategory('Books')"> Books</label>
+  <label><input type="checkbox" onchange="setCategory('Health')"> Health</label>
+  <label><input type="checkbox" onchange="setCategory('Home & Kitchen')"> Home & Kitchen</label>
+</div>
 
-  </div>
 
-  <!-- PLATFORM -->
-  <div class="filter-section">
-    <h4>Platform</h4>
+<!-- PLATFORM -->
+<div class="filter-section">
+  <h4>Platform</h4>
 
-    <label><input type="checkbox" onchange="setPlatform('All')"> All</label>
-    <label><input type="checkbox" onchange="setPlatform('amazon')"> Amazon</label>
-    <label><input type="checkbox" onchange="setPlatform('flipkart')"> Flipkart</label>
-    <label><input type="checkbox" onchange="setPlatform('myntra')"> Myntra</label>
-    <label><input type="checkbox" onchange="setPlatform('meesho')"> Meesho</label>
+  <label><input type="checkbox" onchange="setPlatform('All')"> All</label>
 
-  </div>
+  <!-- SHOPPING -->
+  <h5>🛍️ Shopping Platforms</h5>
+  <label><input type="checkbox" onchange="setPlatform('Amazon')"> Amazon</label>
+  <label><input type="checkbox" onchange="setPlatform('Flipkart')"> Flipkart</label>
+  <label><input type="checkbox" onchange="setPlatform('Myntra')"> Myntra</label>
+  <label><input type="checkbox" onchange="setPlatform('Ajio')"> Ajio</label>
+  <label><input type="checkbox" onchange="setPlatform('Nykaa')"> Nykaa</label>
+
+  <!-- TRAVEL -->
+  <h5>✈️ Travel Platforms</h5>
+  <label><input type="checkbox" onchange="setPlatform('MakeMyTrip')"> MakeMyTrip</label>
+  <label><input type="checkbox" onchange="setPlatform('Goibibo')"> Goibibo</label>
+  <label><input type="checkbox" onchange="setPlatform('Booking.com')"> Booking.com</label>
+  <label><input type="checkbox" onchange="setPlatform('Agoda')"> Agoda</label>
+  <label><input type="checkbox" onchange="setPlatform('Cleartrip')"> Cleartrip</label>
+
+  <!-- FINANCIAL -->
+  <h5>💳 Financial Platforms</h5>
+  <label><input type="checkbox" onchange="setPlatform('HDFC Bank')"> HDFC Bank</label>
+  <label><input type="checkbox" onchange="setPlatform('SBI Card')"> SBI Card</label>
+  <label><input type="checkbox" onchange="setPlatform('Axis Bank')"> Axis Bank</label>
+  <label><input type="checkbox" onchange="setPlatform('IDFC FIRST Bank')"> IDFC FIRST Bank</label>
+  <label><input type="checkbox" onchange="setPlatform('Bajaj Finserv')"> Bajaj Finserv</label>
+
+  <!-- SOFTWARE -->
+  <h5>💻 Software & Services</h5>
+  <label><input type="checkbox" onchange="setPlatform('GoDaddy')"> GoDaddy</label>
+  <label><input type="checkbox" onchange="setPlatform('Hostinger')"> Hostinger</label>
+  <label><input type="checkbox" onchange="setPlatform('Google Workspace')"> Google Workspace</label>
+  <label><input type="checkbox" onchange="setPlatform('Canva')"> Canva</label>
+  <label><input type="checkbox" onchange="setPlatform('Udemy')"> Udemy</label>
+
+</div>
 
   <!-- PRICE RANGE (CUSTOM USER INPUT) -->
   <div class="filter-section">
@@ -150,23 +181,21 @@
 </div>
 <marquee><h2>Search for the products you want</h2></marquee>
 
-
     <!-- PRODUCTS GRID -->
 
 <div class="products-grid" id="productsGrid">
-  <div class="load-more-wrapper">
+
+</div>
+    <div class="load-more-wrapper">
 
   <button id="loadMoreBtn">
     Load More
   </button>
 
+  </section>
+
+
 </div>
-
-</div>
-
-  
-
-
 
   <!-- JS -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -188,33 +217,34 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 const productsGrid = document.getElementById("productsGrid");
+const loadBtn = document.getElementById("loadMoreBtn");
 
 // ================= STATE =================
 let allProducts = [];
+let searchResults = [];
+let masterProducts = [];
+let fuseIndex = null;
+let searchTimeout = null;
 
 let selectedCategory = "All";
-
 let selectedPlatform = "All";
-
 let minPrice = 0;
-
 let maxPrice = Infinity;
-
 let searchText = "";
 
-// ================= NEW PAGINATION STATES =================
+// ================= MODE CONTROL =================
+let mode = "browse";
+let searchPage = 0;
+const SEARCH_LIMIT = 20;
 
+// ================= PAGINATION =================
 let lastVisible = null;
-
 let loading = false;
-
 let reachedEnd = false;
-
 const PRODUCTS_LIMIT = 20;
-
 const loadedProductIds = new Set();
 
-// ================= FILTER PANEL OPEN/CLOSE =================
+// ================= FILTER PANEL =================
 function openFilterPanel() {
   document.getElementById("filterPanel").classList.add("active");
 }
@@ -223,132 +253,77 @@ function closeFilterPanel() {
   document.getElementById("filterPanel").classList.remove("active");
 }
 
-// ================= LOAD =================
+// ================= LOAD PRODUCTS (BROWSE MODE ONLY) =================
 async function loadProducts(reset = false) {
 
-  // ================= PREVENT MULTIPLE LOADS =================
-
-  if (loading || reachedEnd) return;
+  if (loading || reachedEnd || mode === "search") return;
 
   loading = true;
 
   try {
 
-    // ================= RESET SYSTEM =================
-
     if (reset) {
-
       allProducts = [];
-
       productsGrid.innerHTML = "";
-
       loadedProductIds.clear();
-
       lastVisible = null;
-
       reachedEnd = false;
     }
-
-    // ================= BASE QUERY =================
 
     let queryRef = db.collection("products")
       .orderBy("createdAt", "desc")
       .limit(PRODUCTS_LIMIT);
 
-    // ================= CATEGORY FILTER =================
-
     if (selectedCategory !== "All") {
-
       queryRef = db.collection("products")
         .where("category", "==", selectedCategory)
         .orderBy("createdAt", "desc")
         .limit(PRODUCTS_LIMIT);
     }
 
-    // ================= PAGINATION =================
-
     if (lastVisible) {
-
       queryRef = queryRef.startAfter(lastVisible);
     }
 
-    // ================= FETCH DATA =================
-
     const snapshot = await queryRef.get();
 
-    // ================= NO MORE PRODUCTS =================
-
     if (snapshot.empty) {
-
       reachedEnd = true;
-
-      const loadBtn = document.getElementById("loadMoreBtn");
-
-      if (loadBtn) {
-        loadBtn.style.display = "none";
-      }
-
+      loadBtn.style.display = "none";
       return;
     }
 
-    // ================= SAVE LAST DOC =================
-
     lastVisible = snapshot.docs[snapshot.docs.length - 1];
 
-    // ================= PREVENT DUPLICATES =================
-
     snapshot.forEach(doc => {
-
       if (!loadedProductIds.has(doc.id)) {
-
         loadedProductIds.add(doc.id);
-
-        allProducts.push({
-          id: doc.id,
-          ...doc.data()
-        });
+        allProducts.push({ id: doc.id, ...doc.data() });
       }
     });
-
-    // ================= RENDER =================
 
     renderProducts();
 
   } catch (error) {
-
     console.error("Error loading products:", error);
-
   } finally {
-
     loading = false;
   }
 }
 
-// ================= RENDER =================
+// ================= RENDER BROWSE =================
 function renderProducts() {
 
   productsGrid.innerHTML = "";
 
-  // ================= FUSE SEARCH =================
-
-  const options = {
-    keys: [
-      "title",
-      "desc",
-      "category",
-      "platform"
-    ],
-    threshold: 0.4,
-    includeScore: true
-  };
-
-  const fuse = new Fuse(allProducts, options);
+  const fuse = new Fuse(allProducts, {
+    keys: ["title", "desc", "category", "platform"],
+    threshold: 0.4
+  });
 
   const searchedProducts = searchText
-    ? fuse.search(searchText).map(result => result.item)
+    ? fuse.search(searchText).map(r => r.item)
     : allProducts;
-
-  // ================= FILTER =================
 
   const filtered = searchedProducts.filter(p => {
 
@@ -368,55 +343,140 @@ function renderProducts() {
     return categoryMatch && platformMatch && priceMatch;
   });
 
-  // ================= EMPTY STATE =================
-
   if (filtered.length === 0) {
-
     productsGrid.innerHTML = `
       <div class="no-products-found">
         <h2>No Products Found</h2>
         <p>Try searching something else.</p>
       </div>
     `;
-
     return;
   }
 
-  // ================= PRODUCTS =================
+  const fragment = document.createDocumentFragment();
 
   filtered.forEach(product => {
+    const div = document.createElement("div");
+    div.className = "product-card";
 
-    productsGrid.innerHTML += `
-      <div class="product-card">
-
-        <div class="product-image">
-          <img src="${product.image}" loading="lazy">
-
-          <div class="platform-tag ${product.platform}">
-            ${product.platform}
-          </div>
+    div.innerHTML = `
+      <div class="product-image">
+        <img src="${product.image}" loading="lazy">
+        <div class="platform-tag ${product.platform}">
+          ${product.platform}
         </div>
+      </div>
 
-        <div class="product-info">
-          <h3>${product.title}</h3>
-          <p>${product.desc}</p>
+      <div class="product-info">
+        <h3>${product.title}</h3>
+        <p>${product.desc}</p>
 
-          <div class="product-bottom">
-            <h4>₹${product.price}</h4>
-
-            <a 
-              href="${product.link}" 
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Buy Now
-            </a>
-          </div>
+        <div class="product-bottom">
+          <h4>₹${product.price}</h4>
+          <a href="${product.link}" target="_blank">Buy Now</a>
         </div>
-
       </div>
     `;
+
+    fragment.appendChild(div);
   });
+
+  productsGrid.appendChild(fragment);
+}
+
+// ================= FULL DATABASE SEARCH ENGINE =================
+async function initSearchEngine() {
+
+  const snapshot = await db.collection("products")
+    .orderBy("createdAt", "desc")
+    .get();
+
+  masterProducts = [];
+
+  snapshot.forEach(doc => {
+    masterProducts.push({ id: doc.id, ...doc.data() });
+  });
+
+  fuseIndex = new Fuse(masterProducts, {
+    keys: ["title", "desc", "category", "platform"],
+    threshold: 0.4
+  });
+}
+
+// ================= SEARCH INPUT (0.1s FEEL FAST) =================
+document.getElementById("searchInput")
+.addEventListener("input", (e) => {
+
+  const value = e.target.value.trim();
+
+  clearTimeout(searchTimeout);
+
+  searchTimeout = setTimeout(() => {
+
+    searchText = value;
+
+    if (!fuseIndex) return;
+
+    // SWITCH MODE
+    mode = value.length > 0 ? "search" : "browse";
+    searchPage = 0;
+
+    searchResults = value
+      ? fuseIndex.search(value).map(r => r.item)
+      : [];
+
+    productsGrid.innerHTML = "";
+
+    if (mode === "search") {
+      renderSearchResults();
+    } else {
+      loadProducts(true);
+    }
+
+  }, 80); // ⚡ faster than Amazon feel
+});
+
+// ================= SEARCH RENDER =================
+function renderSearchResults() {
+
+  const start = searchPage * SEARCH_LIMIT;
+  const end = start + SEARCH_LIMIT;
+
+  const chunk = searchResults.slice(start, end);
+
+  const fragment = document.createDocumentFragment();
+
+  chunk.forEach(product => {
+
+    const div = document.createElement("div");
+    div.className = "product-card";
+
+    div.innerHTML = `
+      <div class="product-image">
+        <img src="${product.image}" loading="lazy">
+        <div class="platform-tag ${product.platform}">
+          ${product.platform}
+        </div>
+      </div>
+
+      <div class="product-info">
+        <h3>${product.title}</h3>
+        <p>${product.desc}</p>
+
+        <div class="product-bottom">
+          <h4>₹${product.price}</h4>
+          <a href="${product.link}" target="_blank">Buy Now</a>
+        </div>
+      </div>
+    `;
+
+    fragment.appendChild(div);
+  });
+
+  productsGrid.appendChild(fragment);
+
+  loadBtn.style.display =
+    end >= searchResults.length ? "none" : "block";
 }
 
 // ================= FILTER FUNCTIONS =================
@@ -436,32 +496,24 @@ function applyCustomPrice() {
   renderProducts();
 }
 
-// ================= SEARCH =================
-document.getElementById("searchInput")
-.addEventListener("input", async (e) => {
+// ================= LOAD MORE =================
+loadBtn.addEventListener("click", () => {
 
-  searchText = e.target.value.trim();
+  if (mode === "browse") {
+    loadProducts();
+  }
 
-  productsGrid.innerHTML = "";
-
-  allProducts = [];
-
-  loadedProductIds.clear();
-
-  lastVisible = null;
-
-  reachedEnd = false;
-
-  await loadProducts(true);
+  else if (mode === "search") {
+    searchPage++;
+    renderSearchResults();
+  }
 });
+
+// ================= INIT =================
 loadProducts();
-document.getElementById("loadMoreBtn")
-.addEventListener("click", () => {
+initSearchEngine();
 
-  loadProducts();
-});
 </script>
-   <script async="async" data-cfasync="false" src="https://pl29461441.effectivecpmnetwork.com/2c77e67061fad667246a66c94d9bb9f0/invoke.js"></script>
 </body>
 
 </html>
