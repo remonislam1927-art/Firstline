@@ -1038,3 +1038,49 @@ transform:translateY(-3px);
   font-weight: bold;
   margin: 5px 0 0;
 }
+/* ================= BASE TAG ================= */
+.platform-tag{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  z-index: 2;
+  text-transform: capitalize;
+}
+
+/* ================= SHOPPING ================= */
+.tag-amazon { background: #FF9900; }
+.tag-flipkart { background: #2874F0; }
+.tag-myntra { background: #FF3F6C; }
+.tag-ajio { background: #000000; }
+.tag-nykaa { background: #E80071; }
+
+/* ================= TRAVEL ================= */
+.tag-makemytrip { background: #1E90FF; }
+.tag-goibibo { background: #FF6D38; }
+.tag-bookingcom { background: #003580; }
+.tag-agoda { background: #5C2D91; }
+.tag-cleartrip { background: #FF4D00; }
+
+/* ================= FINANCE ================= */
+.tag-hdfcbank { background: #004C8F; }
+.tag-sbicard { background: #1A4D8F; }
+.tag-axisbank { background: #97144D; }
+.tag-idfcfirstbank { background: #FF0000; }
+.tag-bajajfinserv { background: #0033A0; }
+
+/* ================= SOFTWARE ================= */
+.tag-godaddy { background: #1BDBDB; color: black; }
+.tag-hostinger { background: #673DE6; }
+.tag-googleworkspace { background: #4285F4; }
+.tag-canva { background: #00C4CC; }
+.tag-udemy { background: #A435F0; }
+
+/* ================= DEFAULT FALLBACK ================= */
+.tag-default {
+  background: gray;
+}
